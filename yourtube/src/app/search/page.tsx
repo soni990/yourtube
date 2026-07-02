@@ -1,25 +1,34 @@
 "use client";
 
 import SearchResult from "@/components/SearchResult";
-import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
-const page = () => {
+function SearchContent() {
   const params = useSearchParams();
   const q = params.get("q");
+
   return (
-    <div className="felx-1 p-4">
-      <div className="mxa-w-6xl">
+    <div className="flex-1 p-4">
+      <div className="max-w-6xl">
         {q && (
           <div className="mb-6">
-            <h1 className="text-xl font-medium mb-4">Search results for "{q}" </h1>
+            <h1 className="text-xl font-medium mb-4">
+              Search results for "{q}"
+            </h1>
           </div>
         )}
-        <Suspense fallback={<div>Loading search results...</div>}>
-        <SearchResult query={q || ""}></SearchResult>
-        </Suspense>
+
+        <SearchResult query={q || ""} />
       </div>
     </div>
   );
-};
-export default page;
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading search results...</div>}>
+      <SearchContent />
+    </Suspense>
+  );
+}
