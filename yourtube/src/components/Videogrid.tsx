@@ -4,7 +4,7 @@ import Videocard from "./Videocard";
 import axiosinstance from "@/lib/axiosinstance";
 
 const Videogrid = () => {
-  const [videos, setVideos] = useState<any>(null);
+  const [videos, setVideos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchVideo = async () => {
@@ -52,7 +52,7 @@ const Videogrid = () => {
       {loading ? (
         <>Loading...</>
       ) : (
-        videos.map((video: any) => <Videocard key={video._id} video={video} />)
+        videos?.map((video: any) => <Videocard key={video._id} video={video} />)
       )}
     </div>
   );

@@ -12,6 +12,7 @@ import {
 import { formatDistanceToNow } from "date-fns";
 import { useUser } from "@/lib/authContext";
 import axiosinstance from "@/lib/axiosinstance";
+import WatchPartyButton from "./watch-party/watchPartyButton";
 
 const VideoInfo = ({ video }: any) => {
   const [likes, setLikes] = useState(video.Like || 0);
@@ -178,6 +179,7 @@ const VideoInfo = ({ video }: any) => {
             <Download className="w-5 h-5 mr-2" />
             Dowload
           </Button>
+          <WatchPartyButton videoId={video._id}></WatchPartyButton>
           <Button
             variant="ghost"
             size="sm"

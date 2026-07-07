@@ -189,7 +189,7 @@ const Comments = ({ videoId }: any) => {
                 ) : (
                   <>
                     <p className="text-sm mb-3">{comment.commentbody}</p>
-                    {comment.userid === user._id && (
+                    {user && comment.userid === user._id && (
                       <div className="flex gap-2">
                         <Button
                           variant="ghost"
