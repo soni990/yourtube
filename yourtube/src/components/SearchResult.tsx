@@ -2,6 +2,7 @@
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import axiosinstance from "@/lib/axiosinstance";
 
 const SearchResult = ({ query }: any) => {
   if (!query.trim()) {
@@ -12,42 +13,23 @@ const SearchResult = ({ query }: any) => {
     );
   }
   const [video, setVideo] = useState<any>(null);
-  const videos = async () => {
-    const allvideos = [
-      {
-        _id: "1",
-        videotitle: "Amazing Nature Documentary",
-        filename: "nature-doc.mp4",
-        filetype: "video/mp4",
-        filepath: "/videos/nature-doc.mp4",
-        filesize: "500MB",
-        videochannel: "Nature Channel",
-        Like: 1250,
-        views: 45000,
-        uploader: "nature_lover",
-        createdAt: new Date().toISOString(),
-      },
-      {
-        _id: "2",
-        videotitle: "Cooking Tutorial: Perfect Pasta",
-        filename: "pasta-tutorial.mp4",
-        filetype: "video/mp4",
-        filepath: "/videos/pasta-tutorial.mp4",
-        filesize: "300MB",
-        videochannel: "Chef's Kitchen",
-        Like: 890,
-        views: 23000,
-        uploader: "chef_master",
-        createdAt: new Date(Date.now() - 86400000).toISOString(),
-      },
-    ];
-    let results = allvideos.filter(
-      (vid) =>
+ const videos = async () => {
+  try {
+    const res = await axiosinstance.get("/video/getallvideos");
+
+    const allvideos = res.data;
+
+    const results = allvideos.filter(
+      (vid: any) =>
         vid.videotitle.toLowerCase().includes(query.toLowerCase()) ||
-        vid.videochannel.toLowerCase().includes(query.toLowerCase()),
+        vid.videochannel.toLowerCase().includes(query.toLowerCase())
     );
+
     setVideo(results);
-  };
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+  }
+};
   useEffect(() => {
     videos();
   }, [query]);
@@ -73,11 +55,11 @@ const SearchResult = ({ query }: any) => {
       </div>
     );
   }
-  const vids = "/video/vdo.mp4";
+  //const vids = "/video/vdo.mp4";
 
   return (
     <div className="space-y-6">
-      {video.length > 0 && (
+      {video.length > 0 && (  
         <div className="space-y-4">
           {video.map((video: any) => (
             <Link
@@ -87,7 +69,7 @@ const SearchResult = ({ query }: any) => {
             >
               <div className="relative w-40 aspect-video bg-gray-100 rounded overflow-hidden shrink-0">
                 <video
-                  src={vids}
+                  src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${video.filepath}`}
                   className="w-full object-cover group-hover:scale-105 transition-transform duration-200"
                 />
               </div>

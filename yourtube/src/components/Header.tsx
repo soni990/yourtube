@@ -16,8 +16,11 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import ChannelDialogue from "./ChannelDialogue";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/lib/authContext";
+import axiosinstance from "@/lib/axiosinstance";
+import { toast } from "sonner";
+
 const Header = () => {
-  const { user, logout, handleGoogleSignIn } : any= useUser();
+  const { user, logout, handleGoogleSignIn }: any = useUser();
   // const user: any =
   //null; //sign in
   // {
@@ -30,6 +33,18 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
+  const handleUpgrade = async (plan: string) => {
+    try {
+      const res = await axiosinstance.post("/user/create-checkout-session", {
+        userId: user._id,
+        plan,
+      });
+
+      window.location.href = res.data.url;
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "Payment failed");
+    }
+  };
   const handlesearch = (e: FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -100,15 +115,13 @@ const Header = () => {
                   className="relative h-8 w-8 rounded-full"
                 >
                   <Avatar className="h-8 w-8">
-                    <AvatarImage
-                      src={user.image}
-                    />
+                    <AvatarImage src={user.image} />
                     <AvatarFallback>{user.name?.[0] || "U"}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56 " align="end" forceMount>
-                {user ?.channelname ? (
+                {user?.channelname ? (
                   <DropdownMenuItem asChild>
                     <Link href={`/channel/${user?._id}`}>Your channel</Link>
                   </DropdownMenuItem>
@@ -134,14 +147,44 @@ const Header = () => {
                 <DropdownMenuItem asChild>
                   <Link href="/watch-later">Watch later</Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/download">Downloads</Link>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
+
+                {user.plan === "free" && (
+                  <>
+                    <DropdownMenuItem onClick={() => handleUpgrade("bronze")}>
+                      🥉 Upgrade to Bronze
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem onClick={() => handleUpgrade("silver")}>
+                      🥈 Upgrade to Silver
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem onClick={() => handleUpgrade("gold")}>
+                      🥇 Upgrade to Gold
+                    </DropdownMenuItem>
+                  </>
+                )}
+
+                {user.plan !== "free" && (
+                  <DropdownMenuItem disabled>
+                    Current Plan: {user.plan.toUpperCase()}
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuSeparator />
+
                 <DropdownMenuItem onClick={logout}>Sign out</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </>
         ) : (
           <>
-            <Button className="flex items-center gap-2" onClick={handleGoogleSignIn}>
+            <Button
+              className="flex items-center gap-2"
+              onClick={handleGoogleSignIn}
+            >
               <User className="w-4 h-4" />
               Sign in
             </Button>

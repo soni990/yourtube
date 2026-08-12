@@ -1,0 +1,22 @@
+# Environment variables
+.env
+*.env
+
+# Node modules
+node_modules/
+**/node_modules/
+
+# Video uploads
+server/uploads/
+*.mp4
+
+# Next.js
+yourtube/.next/
+yourtube/out/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

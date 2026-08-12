@@ -13,7 +13,7 @@ type RelatedVideosProps = {
   videos: RelatedVideo[];
 };
 
-const vid = "/video/vdo.mp4";
+//const vid = "/video/vdo.mp4";
 export default function RelatedVideos({ videos }: RelatedVideosProps) {
   return (
     <div className="space-y-4">
@@ -25,7 +25,7 @@ export default function RelatedVideos({ videos }: RelatedVideosProps) {
         >
           <div className="relative w-40 aspect-video bg-gray-100 rounded overflow-hidden shrink-0">
             <video
-              src={vid}
+              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${video.filepath}`}
               className="object-cover group-hover:scale-105 transition-transform duration-200"
             />
           </div>

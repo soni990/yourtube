@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import {
@@ -115,6 +116,45 @@ const VideoInfo = ({ video }: any) => {
       console.log(error);
     }
   };
+const handleDownload = async () => {
+  if (!user) {
+    toast.error("Please login first");
+    return;
+  }
+
+  try {
+    toast.loading("Downloading video...", {
+      id: "download",
+    });
+
+    const res = await axiosinstance.post("/download", {
+      userId: user._id,
+      videoId: video._id,
+    });
+
+    const blob = new Blob([res.data]);
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = video.filename;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    toast.success("Video downloaded successfully!", {
+      id: "download",
+    });
+  } catch (err: any) {
+    toast.error(
+      err.response?.data?.message || "Download failed",
+      {
+        id: "download",
+      }
+    );
+  }
+};
   return (
     <div className="space-y-4">
       <h1 className="text-xl font font-semibold">{video.videotitle}</h1>
@@ -175,6 +215,7 @@ const VideoInfo = ({ video }: any) => {
             variant="ghost"
             size="sm"
             className="bg-gray-100 rounded-full"
+            onClick={handleDownload}
           >
             <Download className="w-5 h-5 mr-2" />
             Dowload

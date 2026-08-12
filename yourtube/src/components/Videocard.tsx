@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { formatDistanceToNow } from "date-fns/formatDistanceToNow";
 
 const Videocard = ({ video }: any) => {
-  const videos = "/video/vdo.mp4";
+  //const videos = "/video/vdo.mp4";
   return (
     <Link href={`/watch/${video._id}`} className="group">
       <div className="space-y-3">

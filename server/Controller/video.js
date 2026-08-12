@@ -6,17 +6,16 @@ export const uploadVideo = async (req, res) => {
       .json({ message: "plz upload a mp4 video file only" });
   } else {
     try {
-      
       const file = new video({
         videotitle: req.body.videotitle,
-        filename: req.file.originalname,
+        filename: req.file.filename,
         filepath: `/uploads/${req.file.filename}`,
+        originalname: req.file.originalname,
         filetype: req.file.mimetype,
         filesize: req.file.size,
         videochannel: req.body.videochannel,
         uploader: req.body.uploader,
       });
-      console.log("filepath",req.file.filename);
       await file.save();
       res.status(201).json("file uploaded successfully");
     } catch (error) {

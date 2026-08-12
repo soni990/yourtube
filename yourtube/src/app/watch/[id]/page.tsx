@@ -32,6 +32,23 @@ const page = () => {
     };
     fetchVideo();
   }, [id]);
+  const handleNextVideo = () => {
+  if (!video || !videos) return;
+
+  const currentIndex = video.findIndex(
+    (vid: any) => vid._id === videos._id
+  );
+
+  if (currentIndex === -1) return;
+
+  const nextIndex = currentIndex + 1;
+
+  if (nextIndex < video.length) {
+    const nextVideo = video[nextIndex];
+
+    window.location.href = `/watch/${nextVideo._id}`;
+  }
+};
   // const relatedVideos = [
   //   {
   //     _id: "1",
@@ -74,7 +91,7 @@ const page = () => {
       <div className="max-w-7xl mx-auto p-4">
         <div className="flex flex-col xl:flex-row gap-6">
           <div className="flex-1">
-            <Videoplayer video={videos} />
+            <Videoplayer video={videos}  onNext={handleNextVideo}/>
             <VideoInfo video={videos} />
             <Comments videoId={id} />
           </div>

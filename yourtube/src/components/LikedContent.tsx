@@ -57,8 +57,7 @@ const LikedContent = () => {
   }
   const handleunlikevideo = async (likeId: string) => {
     try {
-      console.log("Removing liked videos with Id:", likeId);
-      setLike(like.filter((item) => item._id !== likeId));
++      setLike(like.filter((item) => item._id !== likeId));
     } catch (error) {
       console.error("Error removing liked videos:", error);
     }
@@ -84,7 +83,7 @@ const LikedContent = () => {
       </div>
     );
   }
-  const videos = "/video/vdo.mp4";
+  //const videos = "/video/vdo.mp4";
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-2">
@@ -103,7 +102,7 @@ const LikedContent = () => {
             <Link href={`/watch/${item.videoid._id}`}>
               <div>
                 <video
-                  src={videos}
+                  src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${item.videoid.filepath}`}
                   className="w-52 h-30 rounded-xl object-cover cursor-pointer"
                 />
               </div>

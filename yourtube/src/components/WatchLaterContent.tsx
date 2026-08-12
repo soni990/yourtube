@@ -57,7 +57,6 @@ const WatchLaterContent = () => {
   }
   const handlewatchvideos = async (watchId: string) => {
     try {
-      console.log("Removing watch vedios with Id:", watchId);
       setWatch(watch.filter((item) => item._id !== watchId),
       );
     } catch (error) {
@@ -85,7 +84,7 @@ const WatchLaterContent = () => {
       </div>
     );
   }
-  const videos = "/video/vdo.mp4";
+  //const videos = "/video/vdo.mp4";
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-2">
@@ -104,7 +103,7 @@ const WatchLaterContent = () => {
             <Link href={`/watch/${item.videoid._id}`}>
               <div>
                 <video
-                  src={videos}
+                  src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${item.videoid.filepath}`}
                   className="w-52 h-30 rounded-xl object-cover cursor-pointer"
                 />
               </div>

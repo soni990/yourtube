@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import "dotenv/config";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userRoutes from "./Routes/auth.js";
@@ -10,11 +10,11 @@ import watchLaterRoutes from "./Routes/watchLater.js";
 import historyRoutes from "./Routes/history.js";
 import commentRoutes from "./Routes/comment.js";
 import watchPartyRoutes from "./Routes/watchParty.js";
+import downloadRoutes from "./Routes/download.js";
 import http from "http";
 import { Server } from "socket.io";
 import path from "path";
 
-dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: "30mb", extended: true }));
@@ -31,6 +31,7 @@ app.use("/watchlater", watchLaterRoutes);
 app.use("/history", historyRoutes);
 app.use("/comment", commentRoutes);
 app.use("/watch-party", watchPartyRoutes);
+app.use("/download", downloadRoutes);
 
 const PORT = process.env.PORT || 5000;
 

@@ -55,7 +55,6 @@ const Historycontent = () => {
   }
   const handleRemoveHistory = async (historyId: string) => {
     try {
-      console.log("Removing history item with Id:", historyId);
       setHistory((prevHistory) =>
         prevHistory.filter((item) => item._id !== historyId),
       );
@@ -84,7 +83,7 @@ const Historycontent = () => {
       </div>
     );
   }
-  const videos = "/video/vdo.mp4";
+  //const videos = "/video/vdo.mp4";
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-2">
@@ -99,7 +98,7 @@ const Historycontent = () => {
             <Link href={`/watch/${item.videoid._id}`}>
               <div>
                 <video
-                  src={videos}
+                  src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${item.videoid.filepath}`}
                   className="w-52 h-30 rounded-xl object-cover cursor-pointer"
                 />
               </div>
