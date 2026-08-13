@@ -20,7 +20,7 @@ import axiosinstance from "@/lib/axiosinstance";
 import { toast } from "sonner";
 
 const Header = () => {
-  const { user, logout, handleGoogleSignIn }: any = useUser();
+  const { user, logout, handleGoogleSignIn, changeTheme }: any = useUser();
   // const user: any =
   //null; //sign in
   // {
@@ -173,6 +173,15 @@ const Header = () => {
                     Current Plan: {user.plan.toUpperCase()}
                   </DropdownMenuItem>
                 )}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => changeTheme("light")}>
+                  ☀️ Light Theme
+                </DropdownMenuItem>
+
+                <DropdownMenuItem onClick={() => changeTheme("dark")}>
+                  🌙 Dark Theme
+                </DropdownMenuItem>
+
                 <DropdownMenuSeparator />
 
                 <DropdownMenuItem onClick={logout}>Sign out</DropdownMenuItem>
