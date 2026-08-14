@@ -168,9 +168,9 @@ const Header = () => {
                   </>
                 )}
 
-                {user.plan !== "free" && (
+                {user.plan && user.plan !== "free" && (
                   <DropdownMenuItem disabled>
-                    Current Plan: {user.plan.toUpperCase()}
+                    Current Plan: {user.plan?.toUpperCase() || "FREE"}
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator />
