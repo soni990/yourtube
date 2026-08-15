@@ -11,7 +11,8 @@ const sendEmail = async (email, subject, message) => {
       pass: process.env.EMAIL_PASSWORD,
     },
   });
-
+  await transporter.verify();
+  console.log("SMTP connection successful");
   await transporter.sendMail({
     from: process.env.EMAIL,
     to: email,
