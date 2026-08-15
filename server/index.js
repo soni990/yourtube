@@ -14,7 +14,14 @@ import downloadRoutes from "./Routes/download.js";
 import http from "http";
 import { Server } from "socket.io";
 import path from "path";
+import cloudinary from "./config/cloudinary.js";
 
+try {
+  const result = await cloudinary.api.ping();
+  console.log("CLOUDINARY PING SUCCESS:", result);
+} catch (error) {
+  console.error("CLOUDINARY PING FAILED:", error);
+}
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: "30mb", extended: true }));
