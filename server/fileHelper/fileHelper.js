@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
   },
 });
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === "video/mp4") {
+  if (file.mimetype === "video/mp4") {  
     cb(null, true);
   } else {
     cb(null, false);
