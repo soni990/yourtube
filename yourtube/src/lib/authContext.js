@@ -147,8 +147,6 @@ export const UserProvider = ({ children }) => {
       setGoogleLoading(true);
 
       const result = await signInWithPopup(auth, provider);
-      console.log("Google popup success:", result.user);
-
       const firebaseuser = result.user;
 
       let deviceId = localStorage.getItem("deviceId");
@@ -169,11 +167,8 @@ export const UserProvider = ({ children }) => {
         deviceId,
       };
 
-      console.log("Sending Google login payload:", payload);
 
       const response = await axiosinstance.post("/user/login", payload);
-
-      console.log("Google login response:", response.data);
 
       processLoginResponse(response, payload);
     } catch (error) {
