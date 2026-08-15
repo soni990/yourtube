@@ -11,10 +11,27 @@ export const uploadVideo = async (req, res) => {
 
   try {
     // Upload video to Cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path, {
+    const result = await new Promise((resolve, reject) => {
+  const uploadStream = cloudinary.uploader.upload_stream(
+    {
       resource_type: "video",
       folder: "yourtube/videos",
-    });
+    },
+    (error, result) => {
+      if (error) {
+        console.error("CLOUDINARY STREAM ERROR:", error);
+        console.error("Message:", error.message);
+        console.error("HTTP Code:", error.http_code);
+        console.error("Name:", error.name);
+        reject(error);
+      } else {
+        resolve(result);
+      }
+    },
+  );
+
+  fs.createReadStream(req.file.path).pipe(uploadStream);
+});
 
     // Delete temporary local file
     fs.unlink(req.file.path, (error) => {
@@ -40,18 +57,25 @@ export const uploadVideo = async (req, res) => {
       message: "file uploaded successfully",
       videoUrl: result.secure_url,
     });
-  } catch (error) {
-    console.error("Error occurred while uploading video:", error);
+ } catch (error) {
+  console.error("========== CLOUDINARY ERROR ==========");
+  console.error(error);
+  console.error("Message:", error.message);
+  console.error("HTTP Code:", error.http_code);
+  console.error("Name:", error.name);
+  console.error("Error:", error.error);
+  console.error("======================================");
 
-    // Delete temporary file if upload fails
-    if (req.file?.path) {
-      fs.unlink(req.file.path, () => {});
-    }
-
-    return res
-      .status(500)
-      .json({ message: "Error occurred while uploading video" });
+  if (req.file?.path) {
+    fs.unlink(req.file.path, () => {});
   }
+
+  return res.status(500).json({
+    message: "Error occurred while uploading video",
+    error: error.message,
+    details: error.error || null,
+  });
+}
 };
 
 export const getAllVideos = async (req, res) => {
