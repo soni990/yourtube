@@ -10,13 +10,13 @@ export const uploadVideo = async (req, res) => {
   }
 
   try {
-const result = await cloudinary.uploader.upload(req.file.path, {
-  resource_type: "video",
-  folder: "yourtube/videos",
-});
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      resource_type: "video",
+      folder: "yourtube/videos",
+    });
 
-console.log("CLOUDINARY RESULT:", result);
-console.log("CLOUDINARY URL:", result?.secure_url);
+    console.log("CLOUDINARY RESULT:", result);
+    console.log("CLOUDINARY URL:", result?.secure_url);
 
     if (!result?.secure_url) {
       throw new Error(
@@ -47,7 +47,15 @@ console.log("CLOUDINARY URL:", result?.secure_url);
       videoUrl: result.secure_url,
     });
   } catch (error) {
-    console.error("CLOUDINARY UPLOAD ERROR:", error);
+    console.error("========== CLOUDINARY UPLOAD ERROR ==========");
+    console.error("message:", error?.message);
+    console.error("http_code:", error?.http_code);
+    console.error("name:", error?.name);
+    console.error("error:", error);
+    console.error("response:", error?.response);
+    console.error("headers:", error?.response?.headers);
+    console.error("body:", error?.response?.body);
+    console.error("==============================================");
 
     if (req.file?.path) {
       fs.unlink(req.file.path, () => {});
@@ -55,7 +63,7 @@ console.log("CLOUDINARY URL:", result?.secure_url);
 
     return res.status(500).json({
       message: "Error occurred while uploading video",
-      error: error.message,
+      error: error?.message,
     });
   }
 };
