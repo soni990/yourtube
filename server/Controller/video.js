@@ -10,12 +10,26 @@ export const uploadVideo = async (req, res) => {
   }
 
   try {
-    const result = await cloudinary.uploader.upload_large(req.file.path, {
+   const result = await new Promise((resolve, reject) => {
+  cloudinary.uploader.upload_large(
+    req.file.path,
+    {
       resource_type: "video",
       folder: "yourtube/videos",
       use_filename: true,
       unique_filename: true,
-    });
+    },
+    (error, result) => {
+      if (error) {
+        console.error("CLOUDINARY CALLBACK ERROR:", error);
+        reject(error);
+      } else {
+        console.log("CLOUDINARY CALLBACK RESULT:", result);
+        resolve(result);
+      }
+    },
+  );
+});
     console.log("CLOUDINARY RESULT:", result);
     console.log("CLOUDINARY URL:", result?.secure_url);
 
