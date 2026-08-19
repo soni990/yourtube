@@ -328,8 +328,8 @@ export const createCheckoutSession = async (req, res) => {
         },
       ],
 
-      success_url: `http://localhost:3000/payment-success?userId=${userId}&plan=${plan}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `http://localhost:3000/payment-cancel`,
+      success_url: `https://yourtube.vercel.app/payment-success?userId=${userId}&plan=${plan}&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://yourtube.vercel.app/payment-cancel`,
     });
 
     res.json({
