@@ -51,9 +51,7 @@ const io = new Server(server, {
   },
 });
 const rooms = {};
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
+
 
 io.on("connection", (socket) => {
   console.log("User connected: ", socket.id);
