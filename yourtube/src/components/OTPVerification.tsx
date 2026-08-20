@@ -45,7 +45,7 @@ if (!requiresOTP || !pendingUserId) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+      <div className="w-full max-w-md rounded-lg bg-background p-6 shadow-lg">
         <h2 className="mb-2 text-2xl font-semibold">
           Verify Your Login
         </h2>

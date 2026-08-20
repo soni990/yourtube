@@ -70,7 +70,7 @@ export default function LiveChat({ partyId, username }: LiveChatProps) {
         {messages.map((msg, index) => (
           <div
             key={index}
-            className="flex justify-between items-end bg-gray-100 rounded-lg p-3"
+            className="flex justify-between items-end bg-secondary  rounded-lg p-3"
           >
             <div>
               <p className="font-semibold text-blue-600">

@@ -8,7 +8,7 @@ const Videocard = ({ video }: any) => {
   return (
     <Link href={`/watch/${video._id}`} className="group">
       <div className="space-y-3">
-        <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100">
+        <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary ">
           <video
             src={video?.filepath}
             className="object-cover group-hover:scale-105 transition-transform duration-200"

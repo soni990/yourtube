@@ -23,7 +23,7 @@ export default function RelatedVideos({ videos }: RelatedVideosProps) {
           href={`/watch/${video._id}`}
           className="flex gap-2 group"
         >
-          <div className="relative w-40 aspect-video bg-gray-100 rounded overflow-hidden shrink-0">
+          <div className="relative w-40 aspect-video bg-secondary  rounded overflow-hidden shrink-0">
             <video
               src={video?.filepath}
               className="object-cover group-hover:scale-105 transition-transform duration-200"

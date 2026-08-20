@@ -38,7 +38,7 @@ const ChannelHeader = ({ channel, user }: any) => {
                 onClick={() => setIsSubscribed(!isSubscribed)}
                 variant={isSubscribed ? "outline" : "default"}
                 className={
-                  isSubscribed ? "bg-gray-100" : "bg-red-600 hover:bg-red-700"
+                  isSubscribed ? "bg-secondary" : "bg-red-600 hover:bg-red-700"
                 }
               >
                 {isSubscribed ? "Unsubscribe" : "Subscribe"}

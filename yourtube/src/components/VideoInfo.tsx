@@ -170,11 +170,11 @@ const handleDownload = async () => {
           <Button className="ml-4">Subscribe</Button>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex items-center bg-gray-100 rounded-full">
+          <div className="flex items-center bg-secondary  rounded-full">
             <Button
               onClick={handleLike}
               variant="ghost"
-              className="bg-gray-100 rounded-full"
+              className="bg-secondary  rounded-full"
             >
               <ThumbsUp
                 className={`mr-2 h-5 w-5 ${isLiked ? "fill-black" : ""}`}
@@ -186,7 +186,7 @@ const handleDownload = async () => {
               onClick={handleDislike}
               variant="ghost"
               size="sm"
-              className="bg-gray-100 rounded-full"
+              className="bg-secondary  rounded-full"
             >
               <ThumbsDown
                 className={`h-5 w-5 ${isDisliked ? "fill-black" : ""}`}
@@ -197,7 +197,7 @@ const handleDownload = async () => {
           <Button
             variant="ghost"
             size="sm"
-            className={`bg-gray-100 rounded-full ${isWatchlater ? "text-primary" : ""}`}
+            className={`bg-secondary  rounded-full ${isWatchlater ? "text-primary" : ""}`}
             onClick={handlewatchlater}
           >
             <Clock className="h-5 w-5 " />
@@ -206,7 +206,7 @@ const handleDownload = async () => {
           <Button
             variant="ghost"
             size="sm"
-            className="bg-gray-100 rounded-full"
+            className="bg-secondary  rounded-full"
           >
             <Share className="w-5 h-5 mr-2" />
             Share
@@ -214,7 +214,7 @@ const handleDownload = async () => {
           <Button
             variant="ghost"
             size="sm"
-            className="bg-gray-100 rounded-full"
+            className="bg-secondary  rounded-full"
             onClick={handleDownload}
           >
             <Download className="w-5 h-5 mr-2" />
@@ -224,13 +224,13 @@ const handleDownload = async () => {
           <Button
             variant="ghost"
             size="sm"
-            className="bg-gray-100 rounded-full"
+            className="bg-secondary  rounded-full"
           >
             <MoreHorizontal className="w-5 h-5" />
           </Button>
         </div>
       </div>
-      <div className="bg-gray-100 rounded-lg p-4">
+      <div className="bg-secondary  rounded-lg p-4">
         <div className="flex gap-4 text-sm font-medium mb-2">
           <span>{video.views.toLocaleString()} views</span>
           <span>{formatDistanceToNow(new Date(video.createdAt))} ago</span>

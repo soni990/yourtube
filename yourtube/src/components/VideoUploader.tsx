@@ -85,7 +85,7 @@ const VideoUploader = ({ channelId, channelName }: any) => {
       <div className="space-y-4">
         {!videoFile ? (
           <div
-            className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:bg-gray-100 transition-colors"
+            className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:bg-secondary  transition-colors"
             onClick={() => fileInputRef.current?.click()}
           >
             <Upload className="w-12 h-12 mx-auto text-gray-400 mb-2" />
@@ -106,7 +106,7 @@ const VideoUploader = ({ channelId, channelName }: any) => {
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
+            <div className="flex items-center gap-3 p-3 bg-background rounded-lg border">
               <div className="bg-blue-100 p-2 rounded-md">
                 <FileVideo className="w-6 h-6 text-blue-600" />
               </div>
@@ -122,7 +122,7 @@ const VideoUploader = ({ channelId, channelName }: any) => {
                 </Button>
               )}
               {uploadComplete && (
-                <div className="bg-gray-100 p-1 rounded-full">
+                <div className="bg-secondary  p-1 rounded-full">
                   <Check className="w-5 h-5 text-gray-600" />
                 </div>
               )}

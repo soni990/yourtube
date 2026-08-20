@@ -87,7 +87,7 @@ const WatchPartyRoom = ({ partyId }: WatchPartyRoomProps) => {
           className={`px-3 py-1 rounded-full text-sm font-semibold ${
             role === "host"
               ? "bg-green-100 text-green-700"
-              : "bg-gray-100 text-gray-700"
+              : "bg-secondary  text-gray-700"
           }`}
         >
           {role === "host" ? "👑 Host" : "👤 Guest"}

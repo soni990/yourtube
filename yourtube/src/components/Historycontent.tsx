@@ -93,7 +93,7 @@ const Historycontent = () => {
         {history.map((item) => (
           <div
             key={item._id}
-            className="flex items-start gap-4 group hover:bg-gray-100 rounded-xl transition"
+            className="flex items-start gap-4 group hover:bg-secondary  rounded-xl transition"
           >
             <Link href={`/watch/${item.videoid._id}`}>
               <div>

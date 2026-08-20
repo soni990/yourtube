@@ -67,7 +67,7 @@ const SearchResult = ({ query }: any) => {
               href={`/watch/${video._id}`}
               className="flex gap-2 group"
             >
-              <div className="relative w-40 aspect-video bg-gray-100 rounded overflow-hidden shrink-0">
+              <div className="relative w-40 aspect-video bg-secondary  rounded overflow-hidden shrink-0">
                 <video
                   src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${video.filepath}`}
                   className="w-full object-cover group-hover:scale-105 transition-transform duration-200"
