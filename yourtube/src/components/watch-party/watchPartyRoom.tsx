@@ -70,11 +70,11 @@ const WatchPartyRoom = ({ partyId }: WatchPartyRoomProps) => {
     fetchPartyVideo();
   }, [partyId]);
   if (loading) {
-    return <div className="p-6 text-gray-500">Loading Watch Party... 🎬</div>;
+    return <div className="p-6 text-muted-foreground">Loading Watch Party... 🎬</div>;
   }
 
   if (!video) {
-    return <div className="p-6">Video not found.</div>;
+    return <div className="p-6 text-muted-foreground">Video not found.</div>;
   }
   return (
     <div className="p-6">
@@ -87,7 +87,7 @@ const WatchPartyRoom = ({ partyId }: WatchPartyRoomProps) => {
           className={`px-3 py-1 rounded-full text-sm font-semibold ${
             role === "host"
               ? "bg-green-100 text-green-700"
-              : "bg-secondary  text-gray-700"
+              : "bg-secondary  text-muted-foreground"
           }`}
         >
           {role === "host" ? "👑 Host" : "👤 Guest"}
@@ -106,7 +106,7 @@ const WatchPartyRoom = ({ partyId }: WatchPartyRoomProps) => {
 
           <ul className="mt-2">
             {participants.map((p, i) => (
-              <li key={i} className="text-sm text-gray-700">
+              <li key={i} className="text-sm text-muted-foreground">
                 🟢 {p} {i === 0 ? "(Host)" : ""}
               </li>
             ))}

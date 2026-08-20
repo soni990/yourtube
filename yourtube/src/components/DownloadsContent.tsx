@@ -40,7 +40,7 @@ const DownloadsContent = () => {
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh]">
-        <Download className="w-16 h-16 text-gray-400 mb-4" />
+        <Download className="w-16 h-16 text-muted-foreground mb-4" />
         <h2 className="text-2xl font-semibold">Sign in to view Downloads</h2>
       </div>
     );
@@ -49,7 +49,7 @@ const DownloadsContent = () => {
   if (downloads.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh]">
-        <Download className="w-16 h-16 text-gray-400 mb-4" />
+        <Download className="w-16 h-16 text-muted-foreground mb-4" />
         <h2 className="text-2xl font-semibold">No downloaded videos</h2>
       </div>
     );
@@ -57,7 +57,7 @@ const DownloadsContent = () => {
 
   return (
     <div className="space-y-4">
-      <p className="text-gray-600">{downloads.length} videos</p>
+      <p className="text-muted-foreground">{downloads.length} videos</p>
       {downloads.map((item: any) => (
         <Link
           key={item._id}
@@ -74,9 +74,9 @@ const DownloadsContent = () => {
               {item.videoId.videotitle}
             </h3>
 
-            <p className="text-sm text-gray-600">{item.videoId.videochannel}</p>
+            <p className="text-sm text-muted-foreground">{item.videoId.videochannel}</p>
 
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               {item.videoId.views.toLocaleString()} views •{" "}
               {formatDistanceToNow(new Date(item.videoId.createdAt))} ago
             </p>

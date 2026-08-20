@@ -4,7 +4,7 @@ const ChannelVideos=({videos}:any)=>{
     if(videos.length === 0){
         return(
             <div className="py-10 text-center">
-                <p className="text-gray-500 text-lg">No videos uploaded yet</p>
+                <p className="text-muted-foreground text-lg">No videos uploaded yet</p>
             </div>
         )
     }

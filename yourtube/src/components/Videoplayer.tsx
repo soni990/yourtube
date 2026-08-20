@@ -461,7 +461,7 @@ export default function Videoplayer({
         </div>
       </div>
       {partyId && role !== "host" && (
-        <p className="text-xs text-gray-500 mt-2">
+        <p className="text-xs text-muted-foreground mt-2">
           Only host can control playback
         </p>
       )}

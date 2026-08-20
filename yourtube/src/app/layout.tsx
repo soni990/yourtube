@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <div className="min-h-screen bg-background text-black dark:bg-black dark:text-white">
+        <div className="min-h-screen bg-background text-foreground dark:bg-black dark:text-white">
           <UserProvider>
             <Header />
              <OTPVerification />

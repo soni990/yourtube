@@ -165,7 +165,7 @@ const handleDownload = async () => {
           </Avatar>
           <div>
             <h3 className="font-medium">{video.videochannel}</h3>
-            <p className="text-sm text-gray-600">1.2M subscribers</p>
+            <p className="text-sm text-muted-foreground">1.2M subscribers</p>
           </div>
           <Button className="ml-4">Subscribe</Button>
         </div>

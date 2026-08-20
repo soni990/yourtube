@@ -75,11 +75,11 @@ export default function LiveChat({ partyId, username }: LiveChatProps) {
             <div>
               <p className="font-semibold text-blue-600">
                 {msg.sender} :{" "}
-                <span className="font-normal text-gray-800">{msg.text}</span>
+                <span className="font-normal text-muted-foreground">{msg.text}</span>
               </p>{" "}
             </div>
 
-            <span className="text-xs text-gray-500 ml-4 whitespace-nowrap">
+            <span className="text-xs text-muted-foreground ml-4 whitespace-nowrap">
               {msg.time}
             </span>
           </div>

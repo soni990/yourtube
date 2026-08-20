@@ -38,7 +38,7 @@ const SearchResult = ({ query }: any) => {
     return (
       <div className="text-center py-12">
         <h1 className="text-xl font-semibold mb-2">No Result found</h1>
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           Try different keywords or remove search filters
         </p>
       </div>
@@ -48,7 +48,7 @@ const SearchResult = ({ query }: any) => {
   if (!hasResults) {
     return (
       <div className="text-center py-12">
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-muted-foreground">
         Showing <span className="font-semibold">0</span> results for{" "}
         <span className="font-semibold">"{query}"</span>
       </p>
@@ -77,10 +77,10 @@ const SearchResult = ({ query }: any) => {
                 <h3 className="font-medium text-sm line-clamp-2 group-hover:text-blue-600">
                   {video.videotitle}
                 </h3>
-                <p className="text-xs text-gray-600 mt-1">
+                <p className="text-xs text-muted-foreground mt-1">
                   {video.videochannel}
                 </p>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-muted-foreground">
                   {video.views.toLocaleString()} views{" "}
                   {formatDistanceToNow(new Date(video.createdAt))} ago
                 </p>

@@ -66,9 +66,9 @@ const WatchLaterContent = () => {
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh] text-center">
-        <Clock className="w-16 h-16 text-gray-400 mb-4" />
+        <Clock className="w-16 h-16 text-muted-foreground mb-4" />
         <h2 className="text-2xl font-semibold">Keep track of what you watch</h2>
-        <p className="text-gray-500 mt-2">
+        <p className="text-muted-foreground mt-2">
           Watch videos isn't viewable when signed out.
         </p>
       </div>
@@ -78,9 +78,9 @@ const WatchLaterContent = () => {
   if (watch.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh] text-center">
-        <Clock className="w-16 h-16 text-gray-400 mb-4" />
+        <Clock className="w-16 h-16 text-muted-foreground mb-4" />
         <h2 className="text-2xl font-semibold">No watch videos yet</h2>
-        <p className="text-gray-600 mt-2">Videos you save for later appear here.</p>
+        <p className="text-muted-foreground mt-2">Videos you save for later appear here.</p>
       </div>
     );
   }
@@ -88,7 +88,7 @@ const WatchLaterContent = () => {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-2">
-        <p className="text-gray-600">{watch.length} videos</p>
+        <p className="text-muted-foreground">{watch.length} videos</p>
         <Button className="ml-auto flex items-center gap-2  bg-black text-white px-4 py-2">
           <Play />
           Play all
@@ -113,14 +113,14 @@ const WatchLaterContent = () => {
                 <h3 className="text-lg font-semibold line-clamp-2 hover:text-blue-600">
                   {item.videoid.videotitle}
                 </h3>
-                <p className="text-sm text-gray-600 ">
+                <p className="text-sm text-muted-foreground">
                   {item.videoid.videochannel}
                 </p>
-                <p className="text-sm text-gray-600 ">
+                <p className="text-sm text-muted-foreground">
                   {item.videoid.views.toLocaleString()} views •{" "}
                   {formatDistanceToNow(new Date(item.videoid.createdAt))} ago
                 </p>
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="text-sm text-muted-foreground mt-2">
                   watched {formatDistanceToNow(new Date(item.createdAt))}
                 </p>
               </Link>

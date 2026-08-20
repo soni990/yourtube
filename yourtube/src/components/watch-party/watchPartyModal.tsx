@@ -28,10 +28,16 @@ const watchPartyModal=({
                 <DialogHeader>
                     <DialogTitle>Watch Party</DialogTitle>
                 </DialogHeader>
-                <p className="text-sm text-gray-500">Watch videos together with your friends in real-time.</p>
+                <p className="text-sm text-muted-foreground">
+                    Watch videos together with your friends in real-time.
+                </p>
                 <div className="space-y-3 mt-5">
-                    <Button className="w-full" onClick={()=>setScreen("create")}> Create Party</Button>
-                    <Button className="w-full" variant="ghost" onClick={()=>setScreen("join")}>Join Party</Button>
+                    <Button className="w-full" onClick={()=>setScreen("create")}>
+                        Create Party
+                    </Button>
+                    <Button className="w-full" variant="ghost" onClick={()=>setScreen("join")}>
+                        Join Party
+                    </Button>
                 </div>
                 </>
                 )}

@@ -50,7 +50,7 @@ if (!requiresOTP || !pendingUserId) {
           Verify Your Login
         </h2>
 
-        <p className="mb-6 text-sm text-gray-500">
+        <p className="mb-6 text-sm text-muted-foreground">
           We detected a login from a new device or location.
           Please enter the OTP sent to your registered email.
         </p>

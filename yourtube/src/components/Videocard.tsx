@@ -28,8 +28,8 @@ const Videocard = ({ video }: any) => {
                 <h3 className="font-medium text-sm line-clamp-2 group-hover:text-blue-600">
                     {video.videotitle}
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">{video.videochannel}</p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-muted-foreground mt-1">{video.videochannel}</p>
+                <p className="text-sm text-muted-foreground">
                     {video.views.toLocaleString()} views •{" "} 
                     {formatDistanceToNow(new Date(video.createdAt))} ago
                 </p>

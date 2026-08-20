@@ -304,7 +304,7 @@ const Comments = ({ videoId }: any) => {
               />
               <label
                 htmlFor="shareLocation"
-                className="text-sm text-gray-500 cursor-pointer"
+                className="text-sm text-muted-foreground cursor-pointer"
               >
                 Share my location
               </label>
@@ -329,7 +329,7 @@ const Comments = ({ videoId }: any) => {
       )}
       <div className="space-y-6">
         {comments.length === 0 ? (
-          <p className="text-sm text-gray-500 italic">
+          <p className="text-sm text-muted-foreground italic">
             No comments yet. Be the first to comment!
           </p>
         ) : (
@@ -345,7 +345,7 @@ const Comments = ({ videoId }: any) => {
                   <span className="font-semibold text-sm">
                     {comment.usercommented}
                   </span>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-muted-foreground">
                     {formatDistanceToNow(new Date(comment.commentedon))} ago
                   </span>
                 </div>
