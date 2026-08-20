@@ -258,15 +258,13 @@ export default function Videoplayer({
   }, []);
   return (
     <div>
-      <div
-        className="relative aspect-video bg-black rounded-lg overflow-hidden"
-      >
+      <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
         <video
           ref={videoRef}
           className="w-full h-full object-contain"
           onTouchEnd={handleDoubleTap}
-           onMouseMove={resetControlsTimer}
-        onTouchStart={resetControlsTimer}
+          onMouseMove={resetControlsTimer}
+          onTouchStart={resetControlsTimer}
           //controls={!partyId || role === "host"}
           onLoadStart={() => {
             setIsLoading(true);
@@ -333,10 +331,7 @@ export default function Videoplayer({
             });
           }}
         >
-          <source
-            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${video?.filepath}`}
-            type="video/mp4"
-          />
+          <source src={video?.filepath} type="video/mp4" />
           your browser does not support video tag.
         </video>
         {skipFeedback === "backward" && (
