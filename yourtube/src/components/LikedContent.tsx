@@ -102,7 +102,7 @@ const LikedContent = () => {
             <Link href={`/watch/${item.videoid._id}`}>
               <div>
                 <video
-                  src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${item.videoid.filepath}`}
+                  src={item.videoId.filepath} 
                   className="w-52 h-30 rounded-xl object-cover cursor-pointer"
                 />
               </div>

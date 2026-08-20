@@ -65,7 +65,7 @@ const DownloadsContent = () => {
           className="flex gap-4 group"
         >
           <video
-            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${item.videoId.filepath}`}
+            src={item.videoId.filepath} 
             className="w-56 h-32 rounded-xl object-cover"
           />
 
