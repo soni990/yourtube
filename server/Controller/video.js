@@ -44,15 +44,6 @@ export const uploadVideo = async (req, res) => {
       videoUrl: result.secure_url,
     });
   } catch (error) {
-    console.error("========== CLOUDINARY UPLOAD ERROR ==========");
-    console.error("message:", error?.message);
-    console.error("http_code:", error?.http_code);
-    console.error("name:", error?.name);
-    console.error("error:", error);
-    console.error("response:", error?.response);
-    console.error("headers:", error?.response?.headers);
-    console.error("body:", error?.response?.body);
-    console.error("==============================================");
 
     if (req.file?.path) {
       fs.unlink(req.file.path, () => {});
