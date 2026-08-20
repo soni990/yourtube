@@ -15,9 +15,6 @@ export const uploadVideo = async (req, res) => {
       folder: "yourtube/videos",
     });
 
-    console.log("CLOUDINARY RESULT:", result);
-    console.log("CLOUDINARY URL:", result?.secure_url);
-
     if (!result?.secure_url) {
       throw new Error(
         "Cloudinary upload succeeded but secure_url was not returned",
