@@ -1,7 +1,7 @@
 import Download from "../Modals/download.js";
 import User from "../Modals/auth.js";
 import Video from "../Modals/videos.js";
-import path from "path";
+import axios from "axios";   // 👈 naya import (path ki zaroorat nahi rahi)
 
 export const downloadVideo = async (req, res) => {
   try {
@@ -9,20 +9,14 @@ export const downloadVideo = async (req, res) => {
 
     // Check user
     const user = await User.findById(userId);
-
     if (!user) {
-      return res.status(404).json({
-        message: "User not found",
-      });
+      return res.status(404).json({ message: "User not found" });
     }
 
     // Check video
     const video = await Video.findById(videoId);
-
     if (!video) {
-      return res.status(404).json({
-        message: "Video not found",
-      });
+      return res.status(404).json({ message: "Video not found" });
     }
 
     // Check daily download limit
@@ -34,10 +28,7 @@ export const downloadVideo = async (req, res) => {
 
     const downloadCount = await Download.countDocuments({
       userId,
-      downloadedAt: {
-        $gte: today,
-        $lt: tomorrow,
-      },
+      downloadedAt: { $gte: today, $lt: tomorrow },
     });
 
     let limit = 1;
@@ -50,14 +41,12 @@ export const downloadVideo = async (req, res) => {
       limit = 10;
       message = "Silver users can download only 10 videos per day.";
     } else if (user.plan === "gold") {
-      limit = 20; // ya Infinity agar unlimited chahiye
+      limit = 20;
       message = "Gold users can download only 20 videos per day.";
     }
 
     if (downloadCount >= limit) {
-      return res.status(403).json({
-        message,
-      });
+      return res.status(403).json({ message });
     }
 
     // Save download history
@@ -66,17 +55,24 @@ export const downloadVideo = async (req, res) => {
       videoId,
       planAtDownload: user.plan,
     });
-
     await newDownload.save();
 
-    const actualFileName = video.filepath.split("/").pop();
+    // ---------- FIX: Cloudinary se stream karke bhejo ----------
+    const cloudinaryResponse = await axios.get(video.filepath, {
+      responseType: "stream",
+    });
 
-    const filePath = path.join(process.cwd(), "uploads", actualFileName);
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="${video.filename}"`
+    );
+    res.setHeader("Content-Type", video.filetype || "video/mp4");
 
-    return res.download(filePath, video.filename);
+    cloudinaryResponse.data.pipe(res);
+    // ------------------------------------------------------------
+
   } catch (error) {
     console.error(error);
-
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
@@ -93,9 +89,6 @@ export const getDownloads = async (req, res) => {
     res.status(200).json(downloads);
   } catch (error) {
     console.error(error);
-
-    res.status(500).json({
-      message: "Failed to fetch downloads",
-    });
+    res.status(500).json({ message: "Failed to fetch downloads" });
   }
 };
