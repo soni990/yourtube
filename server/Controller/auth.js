@@ -292,6 +292,7 @@ export const upgradePlan = async (req, res) => {
 export const createCheckoutSession = async (req, res) => {
   try {
     const { userId, plan } = req.body;
+     const FRONTEND_URL = process.env.FRONTEND_URL;
 
     if (!userId) {
       return res.status(400).json({
@@ -328,8 +329,10 @@ export const createCheckoutSession = async (req, res) => {
         },
       ],
 
-      success_url: `https://yourtube.vercel.app/payment-success?userId=${userId}&plan=${plan}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `https://yourtube.vercel.app/payment-cancel`,
+    
+
+success_url: `${FRONTEND_URL}/payment-success?userId=${userId}&plan=${plan}&session_id={CHECKOUT_SESSION_ID}`,
+cancel_url: `${FRONTEND_URL}/payment-cancel`,
     });
 
     res.json({
