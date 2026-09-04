@@ -7,15 +7,17 @@ apiInstance.setApiKey(
   process.env.BREVO_API_KEY
 );
 
-export const sendEmail = async (to, subject, htmlContent) => {
+const sendEmail = async (to, subject, htmlContent) => {
   const sendSmtpEmail = new Brevo.SendSmtpEmail();
 
   sendSmtpEmail.subject = subject;
   sendSmtpEmail.htmlContent = htmlContent;
+
   sendSmtpEmail.sender = {
     name: "YourTube",
     email: process.env.EMAIL_FROM,
   };
+
   sendSmtpEmail.to = [
     {
       email: to,
@@ -24,3 +26,5 @@ export const sendEmail = async (to, subject, htmlContent) => {
 
   return await apiInstance.sendTransacEmail(sendSmtpEmail);
 };
+
+export default sendEmail;
