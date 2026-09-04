@@ -1,28 +1,28 @@
-import nodemailer from "nodemailer";
-import dns from "dns";
-dns.setDefaultResultOrder("ipv4first");
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendEmail = async (email, subject, message) => {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASSWORD,
-    },
-  });
+  try {
+    const { data, error } = await resend.emails.send({
+      from: process.env.EMAIL_FROM,
+      to: [email],
+      subject: subject,
+      html: message,
+    });
 
-  await transporter.verify();
+    if (error) {
+      console.error("Resend email error:", error);
+      throw new Error(error.message);
+    }
 
-  console.log("SMTP connection successful");
+    console.log("Email sent successfully:", data.id);
 
-  await transporter.sendMail({
-    from: process.env.EMAIL,
-    to: email,
-    subject,
-    html: message,
-  });
+    return data;
+  } catch (error) {
+    console.error("Email sending failed:", error);
+    throw error;
+  }
 };
 
 export default sendEmail;
