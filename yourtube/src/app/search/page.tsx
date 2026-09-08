@@ -9,19 +9,19 @@ function SearchContent() {
   const q = params.get("q");
 
   return (
-    <div className="flex-1 p-4">
-      <div className="max-w-6xl">
-        {q && (
-          <div className="mb-6">
-            <h1 className="text-xl font-medium mb-4">
-              Search results for "{q}"
-            </h1>
-          </div>
-        )}
-
-        <SearchResult query={q || ""} />
+   <div className="flex-1 p-3 sm:p-4">
+  <div className="w-full max-w-6xl">
+    {q && (
+      <div className="mb-4 sm:mb-6">
+        <h1 className="text-lg sm:text-xl font-medium mb-3 sm:mb-4 break-words">
+          Search results for "{q}"
+        </h1>
       </div>
-    </div>
+    )}
+
+    <SearchResult query={q || ""} />
+  </div>
+</div>
   );
 }
 

@@ -4,32 +4,31 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { formatDistanceToNow } from "date-fns/formatDistanceToNow";
 
 const Videocard = ({ video }: any) => {
-  //const videos = "/video/vdo.mp4";
   return (
     <Link href={`/watch/${video._id}`} className="group">
       <div className="space-y-3">
         <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary ">
           <video
             src={video?.filepath}
-            className="object-cover group-hover:scale-105 transition-transform duration-200"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
           />
           <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1 rounded">
             10:24
           </div>
           </div>
           <div className="flex gap-3">
-            <Avatar className="w-9 h-9 shrink-0">
+             <Avatar className="w-8 h-8 sm:w-9 sm:h-9 shrink-0">
                 <AvatarImage  />
                 <AvatarFallback>
                     {video.videochannel[0]}
                 </AvatarFallback>
             </Avatar>
             <div className="flex-1 min-w-0">
-                <h3 className="font-medium text-sm line-clamp-2 group-hover:text-blue-600">
+                <h3 className="font-medium text-sm line-clamp-2 break-words group-hover:text-blue-600">
                     {video.videotitle}
                 </h3>
-                <p className="text-sm text-muted-foreground mt-1">{video.videochannel}</p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1 break-words">{video.videochannel}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground break-words">
                     {video.views.toLocaleString()} views •{" "} 
                     {formatDistanceToNow(new Date(video.createdAt))} ago
                 </p>

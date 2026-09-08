@@ -80,16 +80,16 @@ const VideoUploader = ({ channelId, channelName }: any) => {
     }
   };
   return (
-    <div className="bg-card rounded-lg p-6">
-      <h2 className="text-xl font-semibold mb-4 text-foreground">Upload a video</h2>
+    <div className="bg-card rounded-lg p-3 sm:p-4 md:p-6">
+      <h2 className="text-lg sm:text-xl font-semibold mb-4 text-foreground">Upload a video</h2>
       <div className="space-y-4">
         {!videoFile ? (
           <div
-            className="border-2 border-dashed border-border rounded-lg p-8 text-center cursor-pointer hover:bg-secondary transition-colors"
+            className="border-2 border-dashed border-border rounded-lg p-5 sm:p-8 text-center cursor-pointer hover:bg-secondary transition-colors"
             onClick={() => fileInputRef.current?.click()}
           >
-            <Upload className="w-12 h-12 mx-auto text-muted-foreground mb-2" />
-            <p className="text-lg font-medium text-foreground">
+            <Upload className="w-10 h-10 sm:w-12 sm:h-12 mx-auto text-muted-foreground mb-2" />
+            <p className="text-base sm:text-lg font-medium text-foreground">
               Drag and Drop video files to upload
             </p>
             <p className="text-sm text-muted-foreground mt-1">
@@ -106,7 +106,7 @@ const VideoUploader = ({ channelId, channelName }: any) => {
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="flex items-center gap-3 p-3 bg-background rounded-lg border">
+            <div className="flex items-center gap-2 sm:gap-3 p-3 bg-background rounded-lg border">
               <div className="bg-blue-100 p-2 rounded-md">
                 <FileVideo className="w-6 h-6 text-blue-600" />
               </div>
@@ -149,13 +149,14 @@ const VideoUploader = ({ channelId, channelName }: any) => {
                 <Progress value={uploadProgress} className="h-2" />
               </div>
             )}
-            <div className="flex justify-end gap-3">
+            <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 sm:gap-3">
               {!uploadComplete && (
                 <>
-                  <Button onClick={cancelUpload} disabled={uploadComplete}>
+                  <Button className="w-full sm:w-auto" onClick={cancelUpload} disabled={uploadComplete}>
                     Cancel
                   </Button>
                   <Button
+                    className="w-full sm:w-auto"
                     onClick={handleUpload}
                     disabled={
                       isUploading || !videoTitle.trim() || uploadComplete

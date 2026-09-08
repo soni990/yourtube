@@ -220,10 +220,10 @@ export default function VideoCall({ partyId, role }: VideoCallProps) {
     };
   }, []);
   return (
-    <div className="mt-8 border rounded-lg p-4">
+    <div className="mt-6 sm:mt-8 border rounded-lg p-3 sm:p-4 w-full min-w-0">
       <h2 className="text-xl font-bold mb-4">🎥 Video Call</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {/* My Camera */}
         <div>
           <h3 className="text-sm font-semibold mb-2">My Camera</h3>
@@ -233,7 +233,7 @@ export default function VideoCall({ partyId, role }: VideoCallProps) {
             autoPlay
             playsInline
             muted
-            className="w-full h-64 object-cover rounded-lg border"
+            className="w-full aspect-video object-cover rounded-lg border"
           />
         </div>
 
@@ -245,16 +245,16 @@ export default function VideoCall({ partyId, role }: VideoCallProps) {
             ref={remoteVideoRef}
             autoPlay
             playsInline
-            className="w-full h-64 object-cover rounded-lg border"
+            className="w-full aspect-video object-cover rounded-lg border"
           />
         </div>
       </div>
 
       {/* Controls */}
-      <div className="mt-6 flex gap-4">
+      <div className="mt-4 sm:mt-6 flex flex-wrap gap-2 sm:gap-4">
         <button
           onClick={toggleMute}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+          className="flex-1 sm:flex-none bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base"
         >
           {isMuted ? "🎤 Unmute" : "🔇 Mute"}
         </button>
@@ -262,35 +262,37 @@ export default function VideoCall({ partyId, role }: VideoCallProps) {
         <button
           onClick={toggleCamera}
           disabled={isSharingScreen}
-          className="bg-red-600 text-white px-4 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 sm:flex-none bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base"
         >
           {cameraOff ? "📷 Camera On" : "🚫 Camera Off"}
         </button>
         <button
           onClick={shareScreen}
-          className="bg-green-600 text-white px-4 py-2 rounded-lg"
+          className="flex-1 sm:flex-none bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base"
         >
           {isSharingScreen ? "🛑 Stop Sharing" : "🖥️ Share Screen"}
         </button>
         <button
           onClick={isRecording ? stopRecording : startRecording}
-          className="bg-purple-600 text-white px-4 py-2 rounded-lg"
+          className="flex-1 sm:flex-none bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base"
         >
           {isRecording ? "⏹️ Stop Recording" : "⏺️ Start Recording"}
         </button>
         <button
           onClick={leaveCall}
-          className="ml-auto bg-gray-700 text-white px-4 py-2 rounded-lg"
+          className="w-full sm:w-auto sm:ml-auto bg-gray-700 text-white px-4 py-2 rounded-lg text-sm sm:text-base"
         >
           Leave Call
         </button>
       </div>
       <Dialog open={hostLeftDialog} onOpenChange={setHostLeftDialog}>
-        <DialogContent>
+        <DialogContent className="w-[calc(100%-2rem)] sm:max-w-md rounded-lg">
           <DialogHeader>
-            <DialogTitle>Watch Party Ended</DialogTitle>
+            <DialogTitle className="text-lg sm:text-xl">
+            Watch Party Ended
+            </DialogTitle>
 
-            <DialogDescription>
+            <DialogDescription className="text-sm sm:text-base break-words">
               The host has left the watch party.
             </DialogDescription>
           </DialogHeader>
@@ -298,7 +300,7 @@ export default function VideoCall({ partyId, role }: VideoCallProps) {
           <div className="flex justify-end mt-4">
             <button
               onClick={() => router.push("/")}
-              className="bg-red-600 text-white px-4 py-2 rounded-lg"
+              className="w-full sm:w-auto bg-red-600 text-white px-4 py-2 rounded-lg"
             >
               Go to Home
             </button>

@@ -7,8 +7,8 @@ import axiosinstance from "@/lib/axiosinstance";
 const SearchResult = ({ query }: any) => {
   if (!query.trim()) {
     return (
-      <div>
-        <p>Enter a search term to find videos</p>
+      <div className="px-4 text-center">
+        <p className="text-sm sm:text-base">Enter a search term to find videos</p>
       </div>
     );
   }
@@ -36,9 +36,9 @@ const SearchResult = ({ query }: any) => {
 
   if (!video) {
     return (
-      <div className="text-center py-12">
-        <h1 className="text-xl font-semibold mb-2">No Result found</h1>
-        <p className="text-muted-foreground">
+      <div className="text-center py-8 sm:py-12 px-4">
+        <h1 className="text-lg sm:text-xl font-semibold mb-2">No Result found</h1>
+        <p className="text-sm sm:text-base text-muted-foreground break-words">
           Try different keywords or remove search filters
         </p>
       </div>
@@ -47,7 +47,7 @@ const SearchResult = ({ query }: any) => {
   const hasResults = video ? video.length > 0 : true;
   if (!hasResults) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-8 sm:py-12 px-4">
         <p className="text-lg text-muted-foreground">
         Showing <span className="font-semibold">0</span> results for{" "}
         <span className="font-semibold">"{query}"</span>
@@ -58,29 +58,29 @@ const SearchResult = ({ query }: any) => {
   //const vids = "/video/vdo.mp4";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {video.length > 0 && (  
         <div className="space-y-4">
           {video.map((video: any) => (
             <Link
               key={video._id}
               href={`/watch/${video._id}`}
-              className="flex gap-2 group"
+              className="flex gap-3 group"
             >
-              <div className="relative w-40 aspect-video bg-secondary  rounded overflow-hidden shrink-0">
+              <div className="relative w-32 sm:w-40 aspect-video bg-secondary rounded overflow-hidden shrink-0">
                 <video
                   src={`${video.filepath}`}
-                  className="w-full object-cover group-hover:scale-105 transition-transform duration-200"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                 />
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="font-medium text-sm line-clamp-2 group-hover:text-blue-600">
                   {video.videotitle}
                 </h3>
-                <p className="text-xs text-muted-foreground mt-1">
+                <p className="text-xs text-muted-foreground mt-1 break-words">
                   {video.videochannel}
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-muted-foreground break-words">
                   {video.views.toLocaleString()} views{" "}
                   {formatDistanceToNow(new Date(video.createdAt))} ago
                 </p>

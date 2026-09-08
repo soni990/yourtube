@@ -38,18 +38,27 @@ const page = () => {
   const channel = user;
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto">
-        <ChannelHeader channel={channel} user={user} />
-        <Channeltabs />
-        <div className="px-4 pb-8">
-          <VideoUploader channelId={id} channelName={channel?.channelname} />
-        </div>
-        <div className="px-4 pb-8">
-          {loading ? <p>Loading videos...</p> : <ChannelVideos videos={videos} />}
-        </div>
-      </div>
+   <div className="min-h-screen bg-background">
+  <div className="w-full max-w-7xl mx-auto">
+    <ChannelHeader channel={channel} user={user} />
+    <Channeltabs />
+
+    <div className="px-3 sm:px-4 md:px-6 pb-6 md:pb-8">
+      <VideoUploader
+        channelId={id}
+        channelName={channel?.channelname}
+      />
     </div>
+
+    <div className="px-3 sm:px-4 md:px-6 pb-6 md:pb-8">
+      {loading ? (
+        <p>Loading videos...</p>
+      ) : (
+        <ChannelVideos videos={videos} />
+      )}
+    </div>
+  </div>
+</div>
   );
 };
 

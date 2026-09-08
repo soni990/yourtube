@@ -69,7 +69,7 @@ const DownloadsContent = () => {
             className="w-56 h-32 rounded-xl object-cover"
           />
 
-          <div>
+          <div  className="flex">
             <h3 className="font-semibold group-hover:text-blue-600">
               {item.videoId.videotitle}
             </h3>

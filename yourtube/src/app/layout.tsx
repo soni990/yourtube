@@ -9,19 +9,23 @@ import OTPVerification from "@/components/OTPVerification";
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <div className="min-h-screen bg-background text-foreground dark:bg-black dark:text-white">
-          <UserProvider>
-            <Header />
-             <OTPVerification />
-            <Toaster />
-            <div className="flex">
-              <Sidebar />
-              <div className="flex-1">{children}</div>
-            </div>
-          </UserProvider>
+  <body className="min-h-screen flex flex-col" suppressHydrationWarning>
+    <div className="min-h-screen w-full bg-background text-foreground dark:bg-black dark:text-white">
+      <UserProvider>
+        <Header />
+        <OTPVerification />
+        <Toaster />
+
+        <div className="flex w-full">
+          <Sidebar />
+
+          <main className="flex-1 min-w-0">
+            {children}
+          </main>
         </div>
-      </body>
-    </html>
+      </UserProvider>
+    </div>
+  </body>
+</html>
   );
 }

@@ -108,7 +108,7 @@ const WatchLaterContent = () => {
                 />
               </div>
             </Link>
-            <div className="flex-1">
+            <div className="flex">
               <Link href={`/watch/${item.videoid._id}`}>
                 <h3 className="text-lg font-semibold line-clamp-2 hover:text-blue-600">
                   {item.videoid.videotitle}

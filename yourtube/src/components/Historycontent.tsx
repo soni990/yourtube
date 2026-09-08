@@ -85,7 +85,7 @@ const Historycontent = () => {
   }
   //const videos = "/video/vdo.mp4";
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-10xl mx-auto">
       <div className="mb-2">
         <p className="text-muted-foreground">{history.length} videos</p>
       </div>
@@ -103,7 +103,7 @@ const Historycontent = () => {
                 />
               </div>
             </Link>
-            <div className="flex-1">
+            <div className="flex">
               <Link href={`/watch/${item.videoid._id}`}>
                 <h3 className="text-lg font-semibold line-clamp-2 hover:text-blue-600">
                   {item.videoid.videotitle}

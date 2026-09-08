@@ -14,27 +14,28 @@ const tabs = [
 const Channeltabs = () => {
   const [activeTab, setActiveTab] = useState("videos");
   return (
-    <div className="border-b border-border">
-      <div className="flex items-center gap-4">
-        {tabs.map((tab) => (
-          <Button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            variant="ghost"
-            className={`relative py-3 text-sm transition-colors ${
-              activeTab === tab.id
-                ? "text-foreground font-medium"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-             {activeTab === tab.id && (
-              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-black rounded-full"></span>
-            )}
-            {tab.label}
-          </Button>
-        ))}
-      </div>
-    </div>
+    <div className="border-b border-border overflow-x-auto">
+  <div className="flex items-center gap-1 sm:gap-4 min-w-max">
+    {tabs.map((tab) => (
+      <Button
+        key={tab.id}
+        onClick={() => setActiveTab(tab.id)}
+        variant="ghost"
+        className={`relative shrink-0 py-3 px-3 sm:px-4 text-xs sm:text-sm transition-colors ${
+          activeTab === tab.id
+            ? "text-foreground font-medium"
+            : "text-muted-foreground hover:text-foreground"
+        }`}
+      >
+        {activeTab === tab.id && (
+          <span className="absolute left-0 bottom-0 w-full h-0.5 bg-black rounded-full" />
+        )}
+
+        {tab.label}
+      </Button>
+    ))}
+  </div>
+</div>
   );
 };
 export default Channeltabs;

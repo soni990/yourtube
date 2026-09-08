@@ -44,13 +44,13 @@ if (!requiresOTP || !pendingUserId) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-md rounded-lg bg-background p-6 shadow-lg">
-        <h2 className="mb-2 text-2xl font-semibold">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      <div className="w-full max-w-md rounded-lg bg-background p-4 sm:p-6 shadow-lg">
+        <h2 className="mb-2 text-xl sm:text-2xl font-semibold">
           Verify Your Login
         </h2>
 
-        <p className="mb-6 text-sm text-muted-foreground">
+        <p className="mb-5 sm:mb-6 text-sm text-muted-foreground">
           We detected a login from a new device or location.
           Please enter the OTP sent to your registered email.
         </p>

@@ -390,40 +390,50 @@ export default function Videoplayer({
           />
 
           {/* Controls Row */}
-          <div className="flex items-center justify-between mt-2">
+          <div className="mt-2 flex w-full items-center justify-between gap-1 sm:gap-2">
+            {/* Back 10 sec */}
             <button
               onClick={() => skip(-10)}
               disabled={Boolean(partyId) && role !== "host"}
-              className="p-2 hover:bg-gray-800 rounded disabled:opacity-50"
+              className="rounded p-0.5 hover:bg-gray-800 disabled:opacity-50 sm:p-2"
               title="Back 10 seconds"
             >
-              <RotateCcw size={22} />
+              <RotateCcw className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
             </button>
+
             {/* Play / Pause */}
             <button
               onClick={togglePlay}
               disabled={Boolean(partyId) && role !== "host"}
-              className="p-2 hover:bg-gray-800 rounded disabled:opacity-50"
+              className="rounded p-0.5 hover:bg-gray-800 disabled:opacity-50 sm:p-2"
             >
-              {isPlaying ? <Pause size={22} /> : <Play size={22} />}
+              {isPlaying ? (
+                <Pause className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
+              ) : (
+                <Play className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
+              )}
             </button>
+
+            {/* Forward 10 sec */}
             <button
               onClick={() => skip(10)}
               disabled={Boolean(partyId) && role !== "host"}
-              className="p-2 hover:bg-gray-800 rounded disabled:opacity-50"
+              className="rounded p-0.5 hover:bg-gray-800 disabled:opacity-50 sm:p-2"
               title="Forward 10 seconds"
             >
-              <RotateCw size={22} />
+              <RotateCw className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
             </button>
-            <div className="flex items-center gap-2">
+
+            {/* Volume */}
+            <div className="ml-auto flex items-center gap-1 sm:gap-2">
               <button
                 onClick={toggleMute}
-                className="p-2 hover:bg-gray-800 rounded"
+                className="rounded p-0.5 hover:bg-gray-800 sm:p-2"
               >
                 {isMuted || volume === 0 ? (
-                  <VolumeX size={22} />
+                  <VolumeX className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
                 ) : (
-                  <Volume2 size={22} />
+                  <Volume2 className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
                 )}
               </button>
 
@@ -434,28 +444,36 @@ export default function Videoplayer({
                 step="0.01"
                 value={isMuted ? 0 : volume}
                 onChange={(e) => handleVolumeChange(Number(e.target.value))}
-                className="w-24 cursor-pointer"
+                className="w-8 cursor-pointer sm:w-24"
               />
             </div>
 
             {/* Time */}
-            <div className="text-sm">
+            <div className="text-xs whitespace-nowrap sm:text-sm">
               {formatTime(currentTime)} / {formatTime(duration)}
             </div>
+
+            {/* Next Video */}
             <button
               onClick={onNext}
               disabled={!onNext}
-              className="p-2 hover:bg-gray-800 rounded disabled:opacity-50"
+              className="rounded p-0.5 hover:bg-gray-800 disabled:opacity-50 sm:p-2"
               title="Next video"
             >
-              <SkipForward size={22} />
+              <SkipForward className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
             </button>
+
+            {/* Fullscreen */}
             <button
               onClick={toggleFullscreen}
-              className="p-2 hover:bg-gray-800 rounded"
+              className="rounded p-0.5 hover:bg-gray-800 sm:p-2"
               title={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
             >
-              {isFullscreen ? <Minimize size={22} /> : <Maximize size={22} />}
+              {isFullscreen ? (
+                <Minimize className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
+              ) : (
+                <Maximize className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
+              )}
             </button>
           </div>
         </div>

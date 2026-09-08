@@ -24,17 +24,21 @@ const JoinParty = () => {
     }
   };
   return (
-    <div className="space-y-4">
-      <h2 className="text-lg font-semibold"> JOIN Watch party</h2>
-      <Input
-        placeholder="Enter Party ID"
-        value={partyId}
-        onChange={(e) => setPartyId(e.target.value)}
-      />
-      <Button className="w-full " onClick={join}>
-        Join Party{" "}
-      </Button>
-    </div>
+   <div className="space-y-3 sm:space-y-4">
+  <h2 className="text-base sm:text-lg font-semibold">
+    JOIN Watch Party
+  </h2>
+
+  <Input
+    placeholder="Enter Party ID"
+    value={partyId}
+    onChange={(e) => setPartyId(e.target.value)}
+  />
+
+  <Button className="w-full" onClick={join}>
+    Join Party
+  </Button>
+</div>
   );
 };
 export default JoinParty;

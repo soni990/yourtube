@@ -42,37 +42,50 @@ const CreateParty = ({ videoId }: CreatePartyProps) => {
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-lg font-semibold"> Create Watch Party</h2>
-      <Input value={videoId} readOnly />
-      <Button className="w-full" onClick={create}>
-        Create Party
+    <div className="space-y-3 sm:space-y-4">
+  <h2 className="text-base sm:text-lg font-semibold">
+    Create Watch Party
+  </h2>
+
+  <Input value={videoId} readOnly />
+
+  <Button className="w-full" onClick={create}>
+    Create Party
+  </Button>
+
+  {partyId && (
+    <div className="space-y-3 border rounded-lg p-3 sm:p-4">
+      <p className="font-medium text-sm sm:text-base text-muted-foreground">
+        Party Create Successfully{" "}
+      </p>
+
+      <div>
+        <label className="text-xs sm:text-sm">Party Id</label>
+        <Input value={partyId} readOnly />
+      </div>
+
+      <div>
+        <label className="text-xs sm:text-sm">Invite Link</label>
+        <Input value={inviteLink} readOnly />
+      </div>
+
+      <Button
+        variant="outline"
+        onClick={copyLink}
+        className="w-full"
+      >
+        Copy Invite Link
       </Button>
-      {partyId && (
-        <div className="space-y-3 border rounded-lg p-4">
-          <p className="font-medium text-muted-foreground">
-            Party Create Successfully{" "}
-          </p>
-          <div>
-            <label className="text-sm ">Party Id</label>
-            <Input value={partyId} readOnly />
-          </div>
-          <div>
-            <label className="text-sm ">Invite Link</label>
-            <Input value={inviteLink} readOnly />
-          </div>
-          <Button variant="outline" onClick={copyLink} className="w-full">
-            Copy Invite Link
-          </Button>
-          <Button
-            className="w-full"
-            onClick={() => router.push(`/watch-party/${partyId}`)}
-          >
-            Start Watch Party
-          </Button>
-        </div>
-      )}
+
+      <Button
+        className="w-full"
+        onClick={() => router.push(`/watch-party/${partyId}`)}
+      >
+        Start Watch Party
+      </Button>
     </div>
+  )}
+</div>
   );
 };
 export default CreateParty;

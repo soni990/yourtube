@@ -63,23 +63,23 @@ export default function LiveChat({ partyId, username }: LiveChatProps) {
   };
 
   return (
-    <div className="border rounded-lg p-4 mt-6">
+    <div className="border rounded-lg p-3 sm:p-4 mt-4 sm:mt-6 w-full min-w-0">
       <h2 className="font-bold text-lg mb-3">💬 Live Chat</h2>
 
-      <div className="h-72 overflow-y-auto border rounded p-3 space-y-2">
+      <div className="h-64 sm:h-72 overflow-y-auto border rounded p-2 sm:p-3 space-y-2">
         {messages.map((msg, index) => (
           <div
             key={index}
-            className="flex justify-between items-end bg-secondary  rounded-lg p-3"
+            className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-1 bg-secondary rounded-lg p-2 sm:p-3"
           >
             <div>
-              <p className="font-semibold text-blue-600">
+               <p className="font-semibold text-blue-600 break-words">
                 {msg.sender} :{" "}
                 <span className="font-normal text-muted-foreground">{msg.text}</span>
               </p>{" "}
             </div>
 
-            <span className="text-xs text-muted-foreground ml-4 whitespace-nowrap">
+            <span className="text-xs text-muted-foreground sm:ml-4 shrink-0">
               {msg.time}
             </span>
           </div>
@@ -90,6 +90,7 @@ export default function LiveChat({ partyId, username }: LiveChatProps) {
 
       <div className="flex gap-2 mt-3">
         <Input
+        className="min-w-0 flex-1"
           value={message}
           placeholder="Type a message..."
           onChange={(e) => setMessage(e.target.value)}
@@ -100,7 +101,7 @@ export default function LiveChat({ partyId, username }: LiveChatProps) {
           }}
         />
 
-        <Button onClick={sendMessage}>Send</Button>
+        <Button onClick={sendMessage} className="shrink-0" >Send</Button>
       </div>
     </div>
   );

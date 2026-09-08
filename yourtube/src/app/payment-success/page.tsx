@@ -118,13 +118,13 @@ function PaymentSuccessContent() {
   }, [searchParams, login]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold">
-          {status}
-        </h1>
-      </div>
-    </div>
+    <div className="min-h-screen flex items-center justify-center px-4">
+  <div className="text-center">
+    <h1 className="text-xl sm:text-2xl font-bold">
+      {status}
+    </h1>
+  </div>
+</div>
   );
 }
 

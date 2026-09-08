@@ -70,57 +70,80 @@ const WatchPartyRoom = ({ partyId }: WatchPartyRoomProps) => {
     fetchPartyVideo();
   }, [partyId]);
   if (loading) {
-    return <div className="p-6 text-muted-foreground">Loading Watch Party... 🎬</div>;
+    return <div className="p-3 sm:p-4 md:p-6 text-muted-foreground">
+      Loading Watch Party... 🎬
+    </div>;
   }
 
   if (!video) {
-    return <div className="p-6 text-muted-foreground">Video not found.</div>;
+    return  <div className="p-3 sm:p-4 md:p-6 text-muted-foreground">
+      Video not found.
+    </div>;
   }
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">Watch Party Room</h1>
+    <div className="w-full min-h-screen p-3 sm:p-4 md:p-6">
+  <h1 className="text-xl sm:text-2xl font-bold">
+    Watch Party Room
+  </h1>
 
-      <p className="mt-2">Party ID: {partyId}</p>
+  <p className="mt-2 text-sm sm:text-base break-all">
+    Party ID: {partyId}
+  </p>
 
-      <div className="mt-2">
-        <span
-          className={`px-3 py-1 rounded-full text-sm font-semibold ${
-            role === "host"
-              ? "bg-green-100 text-green-700"
-              : "bg-secondary  text-muted-foreground"
-          }`}
-        >
-          {role === "host" ? "👑 Host" : "👤 Guest"}
-        </span>
-      </div>
+  <div className="mt-2">
+    <span
+      className={`inline-flex px-3 py-1 rounded-full text-xs sm:text-sm font-semibold ${
+        role === "host"
+          ? "bg-green-100 text-green-700"
+          : "bg-secondary text-muted-foreground"
+      }`}
+    >
+      {role === "host" ? "👑 Host" : "👤 Guest"}
+    </span>
+  </div>
 
-      {/* SINGLE VIDEO PLAYER ONLY */}
-      <div className="mt-6">
-        <Videoplayer video={video} partyId={partyId} role={role} />
+  {/* VIDEO PLAYER */}
+  <div className="mt-4 sm:mt-6 w-full min-w-0">
+    <Videoplayer
+      video={video}
+      partyId={partyId}
+      role={role}
+    />
 
-        {/* PARTICIPANTS */}
-        <div className="mt-4">
-          <h2 className="font-semibold">
-            Participants ({participants.length})
-          </h2>
+    {/* PARTICIPANTS */}
+    <div className="mt-4">
+      <h2 className="font-semibold text-sm sm:text-base">
+        Participants ({participants.length})
+      </h2>
 
-          <ul className="mt-2">
-            {participants.map((p, i) => (
-              <li key={i} className="text-sm text-muted-foreground">
-                🟢 {p} {i === 0 ? "(Host)" : ""}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <VideoCall partyId={partyId} role={role} />
-      <LiveChat
-        partyId={partyId}
-        username={role === "host" ? "Host" : "Guest"}
-      />
-
-      <p className="text-green-600 mt-4">Connected Successfully</p>
+      <ul className="mt-2 space-y-1">
+        {participants.map((p, i) => (
+          <li
+            key={i}
+            className="text-sm text-muted-foreground break-all"
+          >
+            🟢 {p} {i === 0 ? "(Host)" : ""}
+          </li>
+        ))}
+      </ul>
     </div>
+  </div>
+
+  <div className="mt-4 sm:mt-6">
+    <VideoCall partyId={partyId} role={role} />
+  </div>
+
+  <div className="mt-4 sm:mt-6">
+    <LiveChat
+      partyId={partyId}
+      username={role === "host" ? "Host" : "Guest"}
+    />
+  </div>
+
+  <p className="text-green-600 text-sm mt-4">
+    Connected Successfully
+  </p>
+</div>
   );
 };
 export default WatchPartyRoom;

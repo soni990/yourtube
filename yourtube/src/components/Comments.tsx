@@ -56,9 +56,9 @@ const Comments = ({ videoId }: any) => {
   };
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-[70vh]">
-        Loading videos...
-      </div>
+      <div className="flex justify-center items-center h-[70vh] px-4 text-center">
+  Loading videos...
+</div>
     );
   }
   const handleSubmitComment = async () => {
@@ -264,187 +264,281 @@ const Comments = ({ videoId }: any) => {
     }
   };
   return (
-    <div className="mt-4">
-      <h2 className="text-xl font-semibold mb-2">{comments.length} Comments</h2>
-      <div className="flex items-center gap-2 mb-4">
-        <label className="text-sm font-medium">Translate to:</label>
 
-        <select
-          value={selectedLanguage}
-          onChange={(e) => setSelectedLanguage(e.target.value)}
-          className="border rounded-md px-2 py-1 text-sm bg-background"
-        >
-          <option value="Hindi">Hindi</option>
-          <option value="English">English</option>
-          <option value="Gujarati">Gujarati</option>
-          <option value="Marathi">Marathi</option>
-          <option value="Spanish">Spanish</option>
-          <option value="French">French</option>
-        </select>
-      </div>
-      {user && (
-        <div className="flex">
-          <Avatar>
-            <AvatarImage src={user.image || ""} alt={user.name} />
-            <AvatarFallback>{user.name?.[0] || "U"}</AvatarFallback>
-          </Avatar>
-          <div className="flex-1 space-y-2">
-            <Textarea
-              placeholder="Add  a comment..."
-              value={newComment}
-              onChange={(e: any) => setNewComment(e.target.value)}
-              className="min-h-20 resize-none border-0 border-b-2 rounded-none focus-visible:ring-0"
-            />
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="shareLocation"
-                checked={shareLocation}
-                onChange={(e) => setShareLocation(e.target.checked)}
-              />
-              <label
-                htmlFor="shareLocation"
-                className="text-sm text-muted-foreground cursor-pointer"
-              >
-                Share my location
-              </label>
-            </div>
-            <div className="flex gap-2 justify-end">
-              <Button
-                onClick={() => setNewComment("")}
-                disabled={!newComment.trim()}
-                variant="ghost"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={handleSubmitComment}
-                disabled={!newComment.trim() || isSubmitting}
-              >
-                Comment
-              </Button>
-            </div>
-          </div>
+<div className="mt-3 w-full min-w-0 sm:mt-4">
+  {/* Comments Heading */}
+  <h2 className="mb-2 text-base font-semibold sm:mb-3 sm:text-xl">
+    {comments.length} Comments
+  </h2>
+
+  {/* Translation */}
+  <div className="mb-3 flex flex-wrap items-center gap-1.5 sm:mb-4 sm:gap-2">
+    <label className="text-xs font-medium sm:text-sm">
+      Translate to:
+    </label>
+
+    <select
+      value={selectedLanguage}
+      onChange={(e) => setSelectedLanguage(e.target.value)}
+      className="rounded-md border bg-background px-2 py-1 text-xs outline-none sm:text-sm"
+    >
+      <option value="Hindi">Hindi</option>
+      <option value="English">English</option>
+      <option value="Gujarati">Gujarati</option>
+      <option value="Marathi">Marathi</option>
+      <option value="Spanish">Spanish</option>
+      <option value="French">French</option>
+    </select>
+  </div>
+
+  {/* Add Comment */}
+  {user && (
+    <div className="flex items-start gap-2 sm:gap-3">
+      {/* User Avatar */}
+      <Avatar className="h-8 w-8 shrink-0 sm:h-10 sm:w-10">
+        <AvatarImage
+          src={user.image || ""}
+          alt={user.name}
+        />
+        <AvatarFallback>
+          {user.name?.[0] || "U"}
+        </AvatarFallback>
+      </Avatar>
+
+      <div className="min-w-0 flex-1 space-y-2">
+        {/* Comment Input */}
+        <Textarea
+          placeholder="Add a comment..."
+          value={newComment}
+          onChange={(e: any) => setNewComment(e.target.value)}
+          className="min-h-16 resize-none rounded-none border-0 border-b-2 px-1 text-xs focus-visible:ring-0 sm:min-h-20 sm:text-sm"
+        />
+
+        {/* Share Location */}
+        <div className="flex items-center gap-1.5">
+          <input
+            type="checkbox"
+            id="shareLocation"
+            checked={shareLocation}
+            onChange={(e) =>
+              setShareLocation(e.target.checked)
+            }
+            className="h-3.5 w-3.5 sm:h-4 sm:w-4"
+          />
+
+          <label
+            htmlFor="shareLocation"
+            className="cursor-pointer text-xs text-muted-foreground sm:text-sm"
+          >
+            Share my location
+          </label>
         </div>
-      )}
-      <div className="space-y-6">
-        {comments.length === 0 ? (
-          <p className="text-sm text-muted-foreground italic">
-            No comments yet. Be the first to comment!
-          </p>
-        ) : (
-          comments.map((comment) => (
-            <div key={comment._id} className="flex gap-4">
-              <Avatar>
-                <AvatarFallback>
-                  {comment.usercommented?.[0] || "U"}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="font-semibold text-sm">
-                    {comment.usercommented}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {formatDistanceToNow(new Date(comment.commentedon))} ago
-                  </span>
-                </div>
-                {editingCommentId === comment._id ? (
-                  <div className="space-y-3">
-                    <Textarea
-                      value={editText}
-                      onChange={(e) => setEditText(e.target.value)}
-                    ></Textarea>
-                    <div className="flex justify-end gap-2">
-                      <Button onClick={handleUpdateComment}>Save</Button>
-                      <Button
-                        variant="ghost"
-                        onClick={() => {
-                          setEditingCommentId(null);
-                          setEditText("");
-                        }}
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <div className="flex items-start justify-between gap-4">
-                      <p className="text-sm flex-1">{comment.commentbody}</p>
-                      {translatedComments[comment._id] && (
-                        <p className="text-sm mt-2 p-2 rounded-md bg-muted">
-                          {translatedComments[comment._id]}
-                        </p>
-                      )}
 
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleTranslate(comment)}
-                        disabled={translatingCommentId === comment._id}
-                      >
-                        {translatingCommentId === comment._id
-                          ? "Translating..."
-                          : "Translate"}
-                      </Button>
+        {/* Comment Buttons */}
+        <div className="flex justify-end gap-1.5 sm:gap-2">
+          <Button
+            onClick={() => setNewComment("")}
+            disabled={!newComment.trim()}
+            variant="ghost"
+            size="sm"
+            className="h-8 px-2 text-xs sm:h-9 sm:px-3 sm:text-sm"
+          >
+            Cancel
+          </Button>
 
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleLike(comment._id)}
-                        className="flex items-center gap-1 shrink-0"
-                      >
-                        <ThumbsUp className="h-4 w-4" />
-                        {comment.likes?.length || 0}
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleDislike(comment._id)}
-                        className="flex items-center gap-1 shrink-0"
-                      >
-                        <ThumbsDown className="h-4 w-4" />
-                        {comment.dislikes?.length || 0}
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleReport(comment._id)}
-                        disabled={comment.reported}
-                      >
-                        {comment.reported ? "Reported" : "Report"}
-                      </Button>
-                    </div>
-                    {user &&
-                      (typeof comment.userid === "string"
-                        ? comment.userid === user._id
-                        : comment.userid._id === user._id) && (
-                        <div className="flex gap-2">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleEdit(comment)}
-                          >
-                            Edit
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleDelete(comment._id)}
-                          >
-                            Delete
-                          </Button>
-                        </div>
-                      )}
-                  </>
-                )}
-              </div>
-            </div>
-          ))
-        )}
+          <Button
+            onClick={handleSubmitComment}
+            disabled={!newComment.trim() || isSubmitting}
+            size="sm"
+            className="h-8 px-2 text-xs sm:h-9 sm:px-3 sm:text-sm"
+          >
+            Comment
+          </Button>
+        </div>
       </div>
     </div>
+  )}
+
+  {/* Comments List */}
+  <div className="mt-4 space-y-4 sm:mt-6 sm:space-y-6">
+    {comments.length === 0 ? (
+      <p className="text-xs italic text-muted-foreground sm:text-sm">
+        No comments yet. Be the first to comment!
+      </p>
+    ) : (
+      comments.map((comment) => (
+        <div
+          key={comment._id}
+          className="flex min-w-0 gap-2 sm:gap-4"
+        >
+          {/* Comment Avatar */}
+          <Avatar className="h-8 w-8 shrink-0 sm:h-10 sm:w-10">
+            <AvatarFallback>
+              {comment.usercommented?.[0] || "U"}
+            </AvatarFallback>
+          </Avatar>
+
+          {/* Comment Content */}
+          <div className="min-w-0 flex-1">
+            {/* Username + Time */}
+            <div className="mb-1 flex min-w-0 flex-wrap items-center gap-1 sm:gap-2">
+              <span className="max-w-full break-words text-xs font-semibold sm:text-sm">
+                {comment.usercommented}
+              </span>
+
+              <span className="text-[10px] text-muted-foreground sm:text-xs">
+                {formatDistanceToNow(
+                  new Date(comment.commentedon)
+                )}{" "}
+                ago
+              </span>
+            </div>
+
+            {/* Edit Mode */}
+            {editingCommentId === comment._id ? (
+              <div className="space-y-2 sm:space-y-3">
+                <Textarea
+                  value={editText}
+                  onChange={(e) =>
+                    setEditText(e.target.value)
+                  }
+                  className="text-xs sm:text-sm"
+                />
+
+                <div className="flex justify-end gap-1.5 sm:gap-2">
+                  <Button
+                    onClick={handleUpdateComment}
+                    size="sm"
+                    className="h-8 px-2 text-xs sm:h-9 sm:px-3 sm:text-sm"
+                  >
+                    Save
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-8 px-2 text-xs sm:h-9 sm:px-3 sm:text-sm"
+                    onClick={() => {
+                      setEditingCommentId(null);
+                      setEditText("");
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <>
+                {/* Comment Text */}
+                <p className="break-words text-xs leading-relaxed sm:text-sm">
+                  {comment.commentbody}
+                </p>
+
+                {/* Translation Result */}
+                {translatedComments[comment._id] && (
+                  <p className="mt-2 break-words rounded-md bg-muted p-2 text-xs sm:text-sm">
+                    {translatedComments[comment._id]}
+                  </p>
+                )}
+
+                {/* Action Buttons */}
+                <div className="mt-2 flex flex-wrap items-center gap-1 sm:mt-3 sm:gap-2">
+                  {/* Translate */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() =>
+                      handleTranslate(comment)
+                    }
+                    disabled={
+                      translatingCommentId === comment._id
+                    }
+                    className="h-7 px-2 text-[11px] sm:h-8 sm:px-3 sm:text-xs"
+                  >
+                    {translatingCommentId === comment._id
+                      ? "Translating..."
+                      : "Translate"}
+                  </Button>
+
+                  {/* Like */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() =>
+                      handleLike(comment._id)
+                    }
+                    className="h-7 gap-1 px-2 text-[11px] sm:h-8 sm:text-xs"
+                  >
+                    <ThumbsUp className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    {comment.likes?.length || 0}
+                  </Button>
+
+                  {/* Dislike */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() =>
+                      handleDislike(comment._id)
+                    }
+                    className="h-7 gap-1 px-2 text-[11px] sm:h-8 sm:text-xs"
+                  >
+                    <ThumbsDown className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    {comment.dislikes?.length || 0}
+                  </Button>
+
+                  {/* Report */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() =>
+                      handleReport(comment._id)
+                    }
+                    disabled={comment.reported}
+                    className="h-7 px-2 text-[11px] sm:h-8 sm:px-3 sm:text-xs"
+                  >
+                    {comment.reported
+                      ? "Reported"
+                      : "Report"}
+                  </Button>
+                </div>
+
+                {/* Edit / Delete */}
+                {user &&
+                  (typeof comment.userid === "string"
+                    ? comment.userid === user._id
+                    : comment.userid?._id === user._id) && (
+                    <div className="mt-1 flex flex-wrap gap-1 sm:mt-2 sm:gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() =>
+                          handleEdit(comment)
+                        }
+                        className="h-7 px-2 text-[11px] sm:h-8 sm:px-3 sm:text-xs"
+                      >
+                        Edit
+                      </Button>
+
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() =>
+                          handleDelete(comment._id)
+                        }
+                        className="h-7 px-2 text-[11px] sm:h-8 sm:px-3 sm:text-xs"
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  )}
+              </>
+            )}
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+</div>
   );
 };
 

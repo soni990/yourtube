@@ -21,34 +21,48 @@ const watchPartyModal=({
         }
     },[open])
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent>
-                {screen ==="home" && (
-                    <>
-                <DialogHeader>
-                    <DialogTitle>Watch Party</DialogTitle>
-                </DialogHeader>
-                <p className="text-sm text-muted-foreground">
-                    Watch videos together with your friends in real-time.
-                </p>
-                <div className="space-y-3 mt-5">
-                    <Button className="w-full" onClick={()=>setScreen("create")}>
-                        Create Party
-                    </Button>
-                    <Button className="w-full" variant="ghost" onClick={()=>setScreen("join")}>
-                        Join Party
-                    </Button>
-                </div>
-                </>
-                )}
-                {screen==="create"&&(
-                    <CreateParty videoId={videoId} />
-                )}
-                {screen==="join"&&(
-                    <JoinParty/>
-                )}
-            </DialogContent>
-        </Dialog>
+       <Dialog open={open} onOpenChange={onOpenChange}>
+  <DialogContent className="w-[calc(100%-2rem)] sm:max-w-md rounded-lg">
+    {screen === "home" && (
+      <>
+        <DialogHeader>
+          <DialogTitle className="text-lg sm:text-xl">
+            Watch Party
+          </DialogTitle>
+        </DialogHeader>
+
+        <p className="text-sm text-muted-foreground">
+          Watch videos together with your friends in real-time.
+        </p>
+
+        <div className="space-y-3 mt-4 sm:mt-5">
+          <Button
+            className="w-full"
+            onClick={() => setScreen("create")}
+          >
+            Create Party
+          </Button>
+
+          <Button
+            className="w-full"
+            variant="ghost"
+            onClick={() => setScreen("join")}
+          >
+            Join Party
+          </Button>
+        </div>
+      </>
+    )}
+
+    {screen === "create" && (
+      <CreateParty videoId={videoId} />
+    )}
+
+    {screen === "join" && (
+      <JoinParty />
+    )}
+  </DialogContent>
+</Dialog>
     )
 }
 export default watchPartyModal
