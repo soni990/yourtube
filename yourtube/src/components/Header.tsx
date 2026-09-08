@@ -128,7 +128,6 @@ const Header = () => {
                     </Button>
                   </div>
                 )}
-
                 <DropdownMenuItem asChild>
                   <Link href="/history">History</Link>
                 </DropdownMenuItem>
@@ -142,7 +141,6 @@ const Header = () => {
                   <Link href="/download">Downloads</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-
                 {user.plan === "free" && (
                   <>
                     <DropdownMenuItem onClick={() => handleUpgrade("bronze")}>
@@ -158,7 +156,6 @@ const Header = () => {
                     </DropdownMenuItem>
                   </>
                 )}
-
                 {user.plan && user.plan !== "free" && (
                   <DropdownMenuItem disabled>
                     Current Plan: {user.plan?.toUpperCase() || "FREE"}
@@ -168,14 +165,18 @@ const Header = () => {
                 <DropdownMenuItem onClick={() => changeTheme("light")}>
                   ☀️ Light Theme
                 </DropdownMenuItem>
-
                 <DropdownMenuItem onClick={() => changeTheme("dark")}>
                   🌙 Dark Theme
                 </DropdownMenuItem>
-
                 <DropdownMenuSeparator />
-
-                <DropdownMenuItem onClick={logout}>Sign out</DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await logout();
+                    router.push("/");
+                  }}
+                >
+                  Sign out
+                </DropdownMenuItem>{" "}
               </DropdownMenuContent>
             </DropdownMenu>
           </>
