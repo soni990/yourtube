@@ -78,7 +78,7 @@ const LikedContent = () => {
     );
   }
   
-  if (history.length === 0) {
+  if (like.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh] text-center">
         <Clock className="w-16 h-16 text-muted-foreground mb-4" />
