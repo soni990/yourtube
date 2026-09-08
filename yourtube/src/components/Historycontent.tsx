@@ -54,14 +54,16 @@ const Historycontent = () => {
     );
   }
   const handleRemoveHistory = async (historyId: string) => {
-    try {
-      setHistory((prevHistory) =>
-        prevHistory.filter((item) => item._id !== historyId),
-      );
-    } catch (error) {
-      console.error("Error removing history item:", error);
-    }
-  };
+  try {
+    await axiosinstance.delete(`/history/${historyId}`);
+
+    setHistory((prevHistory) =>
+      prevHistory.filter((item) => item._id !== historyId),
+    );
+  } catch (error) {
+    console.error("Error removing history:", error);
+  }
+};
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh] text-center">

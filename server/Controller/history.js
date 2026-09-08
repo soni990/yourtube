@@ -39,3 +39,26 @@ export const getAllHistory = async (req, res) => {
     return res.status(500).json({ message: "Error fetching history" });
   }
 };
+export const removeHistory = async (req, res) => {
+  const { historyId } = req.params;
+
+  try {
+    const deletedHistory = await history.findByIdAndDelete(historyId);
+
+    if (!deletedHistory) {
+      return res.status(404).json({
+        message: "History item not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "History removed successfully",
+    });
+  } catch (error) {
+    console.error("Error removing history:", error);
+
+    return res.status(500).json({
+      message: "Error removing history",
+    });
+  }
+};
