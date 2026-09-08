@@ -66,10 +66,10 @@ const DownloadsContent = () => {
         >
           <video
             src={`${item.videoId.filepath}`} 
-            className="w-56 h-32 rounded-xl object-cover"
+            className=" flex w-56 h-32 rounded-xl object-cover"
           />
 
-          <div  className="flex">
+          <div>
             <h3 className="font-semibold group-hover:text-blue-600">
               {item.videoId.videotitle}
             </h3>
