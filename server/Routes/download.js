@@ -1,10 +1,9 @@
 import express from "express";
-import { downloadVideo,getDownloads } from "../Controller/download.js";
+import { downloadVideo,getDownloads,removeDownload } from "../Controller/download.js";
 
 const routes = express.Router();
 
-// Download video
 routes.post("/", downloadVideo);
 routes.get("/:userId", getDownloads);
-
+routes.delete("/:downloadId", removeDownload);
 export default routes;

@@ -15,16 +15,6 @@ import { useUser } from "@/lib/authContext";
 
 const Historycontent = () => {
   const { user }: any = useUser();
-  // const user: any =
-  //   //null; //sign in
-  //   {
-  //     //sign out
-  //     id: 1,
-  //     name: "john Doe",
-  //     email: "john@example.com",
-  //     image: "https://avatars.githubusercontent.com/u/124599?v=4",
-  //   };
-
   const [history, setHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 

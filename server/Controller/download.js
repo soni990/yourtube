@@ -92,3 +92,28 @@ export const getDownloads = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch downloads" });
   }
 };
+export const removeDownload = async (req, res) => {
+  try {
+    const { downloadId } = req.params;
+
+    const deletedDownload = await Download.findByIdAndDelete(downloadId);
+
+    if (!deletedDownload) {
+      return res.status(404).json({
+        message: "Downloaded video not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Video removed from downloads",
+    });
+  } catch (error) {
+    console.error("Error removing download:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to remove downloaded video",
+    });
+  }
+};
