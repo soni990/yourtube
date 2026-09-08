@@ -38,3 +38,27 @@ export const getAllWatchLater = async (req, res) => {
     return res.status(500).json({ message: "Error fetching watchlater" });
   }
 };
+export const removeWatchLater = async (req, res) => {
+  const { watchId } = req.params;
+
+  try {
+    const deletedWatchLater = await watchLater.findByIdAndDelete(watchId);
+
+    if (!deletedWatchLater) {
+      return res.status(404).json({
+        message: "Watch later video not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Video removed from watch later",
+      watchLater: false,
+    });
+  } catch (error) {
+    console.error("Error removing watchlater:", error);
+
+    return res.status(500).json({
+      message: "Error removing watchlater",
+    });
+  }
+};

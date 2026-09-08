@@ -41,3 +41,31 @@ export const getAllLikes = async (req, res) => {
     return res.status(500).json({ message: "Error fetching likes" });
   }
 };
+export const removeLike = async (req, res) => {
+  const { likeId } = req.params;
+
+  try {
+    const deletedLike = await like.findByIdAndDelete(likeId);
+
+    if (!deletedLike) {
+      return res.status(404).json({
+        message: "Like not found",
+      });
+    }
+
+    await video.findByIdAndUpdate(deletedLike.videoid, {
+      $inc: { Like: -1 },
+    });
+
+    return res.status(200).json({
+      message: "Video removed from liked videos",
+      liked: false,
+    });
+  } catch (error) {
+    console.error("Error removing like:", error);
+
+    return res.status(500).json({
+      message: "Error removing like",
+    });
+  }
+};

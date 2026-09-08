@@ -56,12 +56,16 @@ const LikedContent = () => {
     );
   }
   const handleunlikevideo = async (likeId: string) => {
-    try {
-+      setLike(like.filter((item) => item._id !== likeId));
-    } catch (error) {
-      console.error("Error removing liked videos:", error);
-    }
-  };
+  try {
+    await axiosinstance.delete(`/like/${likeId}`);
+
+    setLike((prevLike) =>
+      prevLike.filter((item) => item._id !== likeId)
+    );
+  } catch (error) {
+    console.error("Error removing liked video:", error);
+  }
+};
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh] text-center">
@@ -88,10 +92,6 @@ const LikedContent = () => {
     <div className="max-w-6xl mx-auto">
       <div className="mb-2">
         <p className="text-muted-foreground">{like.length} videos</p>
-        <Button className="ml-auto flex items-center gap-2  bg-black text-white px-4 py-2">
-          <Play />
-          Play all
-        </Button>
       </div>
       <div className="space-y-2">
         {like.map((item) => (

@@ -56,13 +56,16 @@ const WatchLaterContent = () => {
     );
   }
   const handlewatchvideos = async (watchId: string) => {
-    try {
-      setWatch(watch.filter((item) => item._id !== watchId),
-      );
-    } catch (error) {
-      console.error("Error removing watch videos :", error);
-    }
-  };
+  try {
+    await axiosinstance.delete(`/watchlater/${watchId}`);
+
+    setWatch((prevWatch) =>
+      prevWatch.filter((item) => item._id !== watchId)
+    );
+  } catch (error) {
+    console.error("Error removing watch later video:", error);
+  }
+};
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh] text-center">
@@ -89,10 +92,7 @@ const WatchLaterContent = () => {
     <div className="max-w-6xl mx-auto">
       <div className="mb-2">
         <p className="text-muted-foreground">{watch.length} videos</p>
-        <Button className="ml-auto flex items-center gap-2  bg-black text-white px-4 py-2">
-          <Play />
-          Play all
-        </Button>
+        
       </div>
       <div className="space-y-2">
         {watch.map((item) => (
