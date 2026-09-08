@@ -76,7 +76,7 @@ const Sidebar = () => {
               ) : (
                 <div className="px-0 md:px-2 py-1.5">
                   <Button
-                    variant="secondary"
+                    variant="ghost"
                     size="sm"
                     className="w-full px-1 md:px-3"
                     onClick={() => setIsDialogOpen(true)}
